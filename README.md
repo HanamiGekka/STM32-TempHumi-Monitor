@@ -2,77 +2,75 @@
 
 # TempHumi Monitor
 
-A verifiable STM32F103C8T6 temperature/humidity acquisition system with a Qt desktop application, explicit per-channel sources, raw-data recording and Windows portable/Setup delivery.
+An STM32F103C8T6 acquisition system with a Qt desktop app for plotting, recording and exporting temperature and humidity data. Each channel explicitly identifies whether its data comes from a REAL input or MCU simulation.
 
-Desktop **v010.18.1**; MCU firmware **v010.17.1**. Functional acquisition, source simulation and independent physical accuracy are separate results.
+Current release: desktop **v010.18.1** with MCU firmware **v010.17.1**.
 
-![TempHumi v010.18.1: REAL temperature / MCU SIM humidity](docs/release/desktop-v010.18.1.png)
+![Historical TempHumi interface: REAL temperature and MCU SIM humidity on independent axes](docs/release/desktop-showcase.png)
+
+*Maintainer-supplied historical presentation image, showing v010.15.2. Blue uses the right humidity axis; red and orange share the left temperature axis. The humidity shown is MCU-simulated. This image illustrates the layout and is not new v010.18.1 measurement evidence. The [original v010.18.1 screenshot](docs/release/desktop-v010.18.1.png) is retained; see [image provenance](docs/release/PRESENTATION.md).*
 
 ## Features
 
-- Real temperature acquisition and three **provisional** MCU temperature-correction profiles; original and published values are retained.
-- Explicit REAL/SIM selection for each MCU channel, including REAL temperature with MCU SIM humidity. REAL failures never silently become SIM.
-- TH3 serial/file/REPLAY input, independent axes, Inspector, event inspection and SHA-256-verified full-session export.
-- Pause Display leaves recording active; End Session finalizes files and releases the port. F1 opens offline Help; About distinguishes app/source and observed MCU.
-- Recovery and confirmed-configuration restore default ON, with 5 s between at most 12 attempts; fresh device identity/firmware/readback gates changing commands.
-
-## Hardware and requirements
-
-STM32F103C8T6, ADS1115, NTC/U6 conditioning, CHS1101/TLC556/OPA330 humidity design, OLED and CH340 USB-UART. The tested Windows package requires Windows 10/11 x64 and the appropriate CH340 driver. Firmware programming uses ST-Link/SWD. The design render is not an as-built continuity certificate.
-
-[Hardware evidence](docs/hardware/FINAL_TECHNICAL_AUDIT.md) · [Architecture](docs/architecture/OVERVIEW.md)
-
-## Software architecture
-
-HAL/platform -> BSP -> Driver -> pure Algorithm -> Application/source selection -> Protocol. OLED and UART use the same published semantics; Qt consumes results without recalibrating. REAL/REAL is the firmware boot mode.
-
-## Build and firmware installation
-
-Validated tools: Qt 5.14.2/MinGW 7.3 x64, STM32CubeIDE 1.19.0/Arm GCC 13.3, Python3 and STM32CubeProgrammer. Import .project/.cproject or use the commands below. Before flashing, identify the target, verify power and image provenance, close acquisition and preserve a full Flash backup; load BIN at 0x08000000, Verify and compare readback. Firmware fits 64 KiB Flash/20 KiB RAM.
-
-```powershell
-python tools/build_desktop.py --configuration both --label verification --build-root build_verify/qt --evidence build_verify/qt_logs
-python tools/build_mcu.py --build-root build_verify/mcu --evidence build_verify/mcu_logs
-python tools/run_regressions.py --build-root build_verify/tests --evidence build_verify/test_logs --desktop-objects build_verify/qt/qt_debug/debug
-```
-
-[Build / flash instructions](docs/development/BUILD.md)
+- Original temperature and MCU-corrected temperature, with three **provisional** correction profiles.
+- Explicit REAL/SIM selection per channel, including **T:REAL / H:SIM**. A failed REAL channel remains invalid; it never silently switches to SIM.
+- OLED and TH3 UART output from the same published measurement snapshot.
+- Independent temperature/humidity Y axes, sample and event inspection, and serial, growing-file and REPLAY inputs.
+- Exact raw-byte/CSV recording, sidecars and SHA-256-verified full-session export. Pause Display keeps acquisition and recording active; End Session finalizes files and releases COM.
+- Bounded reconnect and confirmed-configuration restoration, enabled by default: 5-second intervals, at most 12 attempts, with fresh identity/firmware/readback checks.
 
 ## Windows portable and Setup
 
-Download the portable ZIP or unsigned Setup from the Release. Extract the complete ZIP before running TempHumi.exe, or install to a writable destination. Setup includes the same validated runtime, Start-menu entries and an optional desktop shortcut; it neither opens COM nor flashes firmware. Uninstall retains unowned data/settings. Keep all Qt libraries/plugins with the EXE.
+Download the **portable ZIP** or **Setup** from [Release v010.18.1](https://github.com/HanamiGekka/STM32-TempHumi-Monitor/releases/tag/v010.18.1). The release includes SHA-256 checksums. No development tools are needed to run the packaged app.
 
-[Release](https://github.com/HanamiGekka/STM32-TempHumi-Monitor/releases/tag/v010.18.1) · [Desktop guide](docs/development/DESKTOP.md)
+1. On Windows 10/11 x64, extract the entire ZIP and run `TempHumi.exe`, or run the **unsigned** Setup. Keep the bundled Qt libraries and plugins beside the EXE.
+2. For a connected board, install the appropriate CH340 driver and select its current port in UART Settings: **115200 baud, 8N1, no flow control**.
+3. Choose a recording folder and select **Draw / Start**. Startup prepares SERIAL without opening a port. Use **Apply Sources** or **Apply Temperature Fit** to request a change, then check MCU confirmation.
+
+Setup creates Start-menu entries and an optional desktop shortcut. It does not connect to COM or flash firmware. Uninstall retains unowned files and preferences. F1 opens offline Help; About separates desktop/source identity from the observed MCU version.
+
+[Desktop guide](docs/development/DESKTOP.md) · [Hardware evidence](docs/hardware/FINAL_TECHNICAL_AUDIT.md)
+
+## Software architecture
+
+HAL/platform → BSP → Driver → pure Algorithm → Application/source selection → Protocol. OLED and UART share the published values; Qt displays them without recalibrating. The firmware boots in REAL/REAL mode.
+
+Hardware includes STM32F103C8T6, ADS1115, an NTC/U6 temperature path, a CHS1101/TLC556/OPA330 humidity design, OLED and CH340 USB-UART. Design drawings do not establish as-built connectivity.
+
+[Architecture and data-flow diagram](docs/architecture/OVERVIEW.md)
 
 ## Acquisition and protocol
 
-Identify the actual port; 115200 baud, 8N1, no flow control. Startup prepares SERIAL without connecting. Choose a recording location and start; Apply Sources/Apply Temperature Fit require MCU confirmation. TH3 has 23 fields carrying raw codes, units, validity/errors, per-channel sources and generation. Display windows are 5–1200 s with at most 24,000 points; raw/CSV recording is independent of display trimming.
+TH3 has **23 fields** covering raw codes, units, validity/errors, per-channel sources and generation. Display windows span **5–1200 seconds**, with at most 24,000 displayed points. Display trimming and axis changes do not alter the full raw/CSV record. Left-side zoom/drag controls both temperature curves; right-side zoom/drag controls humidity. Reset Y Scale restores automatic ranges.
 
-[TH3](docs/protocol/TH2_TH3.md) · [UART commands](docs/protocol/UART_COMMANDS.md)
+[TH3 specification](docs/protocol/TH2_TH3.md) · [UART commands](docs/protocol/UART_COMMANDS.md)
 
 ## Testing and validation
 
-Fresh MCU/Qt Debug and Release builds have zero warnings and errors. All 22 host regression suites, 94 native GUI checks at each of 100% and 150% scale, 120 portable checks and 102 bundle checks pass. Separate portable and installed hardware tests each exceed 3600 seconds of both host recording and forward source time. The validation report records their durations, frame counts and retained anomalies. Actual Setup installation, Help, recording, serial operation and uninstall/data retention also pass.
+The v010.18.1 release acceptance records MCU/Qt Debug and Release builds with zero warnings/errors, 22 host suites, 94 native GUI checks at each of 100%/150% scale, 120 portable checks and 102 bundle checks. Actual installation, Help, recording, serial operation and uninstall/data retention were also checked.
 
-Supplied ten-pair temperature comparison: raw MAE 0.754 °C/RMSE 1.020725 °C; corrected MAE 0.522 °C/RMSE 0.720777 °C; maximum corrected absolute error 1.53 °C; 8/10 within ±1 °C. This is not a full-range metrological accuracy guarantee.
+Portable and installed builds each passed the recorded 3600-second host/source-time gates: **3665.000 / 3664.149 s** and **3664.995 / 3664.148 s**, respectively. Retained anomalies and the scope of each result are in the [validation report](docs/release/VALIDATION.md). These are existing release results; this documentation update did not repeat the long tests or rebuild the binaries.
 
-[Validation](docs/release/VALIDATION.md)
+The supplied ten temperature pairs gave raw MAE **0.754 °C** / RMSE **1.020725 °C** and corrected MAE **0.522 °C** / RMSE **0.720777 °C**; corrected maximum absolute error was **1.53 °C**, with **8/10** within ±1 °C. The sample does not establish independent full-range accuracy.
+
+## Build and firmware installation
+
+Validated toolchain: **Qt 5.14.2 / MinGW 7.3 x64**, **STM32CubeIDE 1.19.0 / Arm GCC 13.3**, Python 3 and STM32CubeProgrammer. The [build guide](docs/development/BUILD.md) covers desktop/MCU builds, host checks and SWD programming. Firmware targets 64 KiB Flash / 20 KiB RAM. Before programming, stop acquisition, identify the target, preserve a full Flash backup and verify image provenance; BIN loads at `0x08000000`, followed by Verify and readback comparison.
 
 ## Known limitations
 
-- REAL humidity remains **PARTIAL / NOT VALIDATED**. Synthetic humidity is not evidence of measured RH accuracy.
-- PWM waveform/frequency/duty are **NOT TESTED**; the near-zero V_CHS1101 test-point reading conflicts with follower/ADC DC readings.
-- Physical USB dropout cause is **UNRESOLVED**. Recovery evidence does not prove a cable, supply or solder-joint diagnosis.
-- Temperature profiles remain provisional; independent full-range accuracy, new optical OLED measurements and another physical Windows PC are not claimed.
+- **REAL humidity: PARTIAL / NOT VALIDATED.** SIM humidity does not demonstrate measured RH accuracy.
+- **PWM: NOT TESTED ON HARDWARE** for waveform, frequency and duty cycle. **V_CHS1101: CONFLICT** with the follower/ADC DC readings.
+- **USB physical root cause: UNRESOLVED.** Successful software recovery does not diagnose the cable, supply or solder joints.
+- **Independent full-range temperature accuracy: NOT VERIFIED.** Profiles are provisional; no new optical OLED measurement or second physical Windows PC is claimed.
+- **Setup: UNSIGNED.**
 
 ## Release and source identity
 
-Desktop v010.18.1 is built from the reviewed public source commit; MCU v010.17.1 remains byte-identical to the verified image. Fresh verification builds embed their own checkout/time and are not same-version replacements. The independent public history maps exact production-input hashes to the frozen source and asset SHA-256 values. Raw sessions, device identities, private history, Board images and account-bearing CAD databases are excluded.
-
-[Source / asset identity](docs/release/SOURCE_IDENTITY.json)
+Desktop **v010.18.1** and MCU **v010.17.1** have separate version identities. The [source/asset mapping](docs/release/SOURCE_IDENTITY.json) identifies the frozen build, reviewed release commit and asset hashes. Fresh builds embed their own checkout/time and do not replace frozen same-version assets. Private history, raw sessions, device identities and account-bearing CAD remain outside the public repository.
 
 ## License and credits
 
-Project-authored source/docs: **GPL-3.0-or-later**. QCustomPlot is by Emanuel Eichhammer; Qt/ST/Arm/MinGW retain upstream terms. The repository owner is the primary developer; other team members' contributions are acknowledged, and they have agreed to public release. Qt corresponding-source archives and runtime notices accompany the Release.
+Project-authored source and documentation: **GPL-3.0-or-later**. QCustomPlot is by Emanuel Eichhammer; Qt/ST/Arm/MinGW retain their upstream terms. The repository owner is the primary developer; other team members' contributions are acknowledged and they agreed to public release. Qt corresponding-source archives and runtime notices accompany the Release.
 
 [LICENSE](LICENSE) · [NOTICE](NOTICE.md) · [Dependency terms](docs/release/THIRD_PARTY_NOTICES.md)

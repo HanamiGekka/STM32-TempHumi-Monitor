@@ -1,78 +1,76 @@
 [English](README.md) | [简体中文](README.zh-CN.md) | [日本語](README.ja.md) | [繁體中文](README.zh-TW.md)
 
-# TempHumi Monitor 温湿度モニタ
+# TempHumi Monitor 温湿度モニター
 
-STM32F103C8T6 を用いた温湿度収集システムです。Qt デスクトップアプリ、チャネル別の明示的なデータソース、生データ記録、Windows のポータブル版とインストーラ版を備えます。
+STM32F103C8T6 によるデータ収集と、Qt デスクトップアプリによる温湿度グラフ、記録、書き出しを組み合わせたシステムです。温度と湿度の各チャネルに、実入力の REAL または MCU シミュレーションの SIM を明示します。
 
-デスクトップ **v010.18.1**、MCU ファームウェア **v010.17.1**。動作確認、シミュレーション、独立した物理精度の評価は区別しています。
+現在のリリース：デスクトップ **v010.18.1**、MCU ファームウェア **v010.17.1**。
 
-![TempHumi v010.18.1: REAL temperature / MCU SIM humidity](docs/release/desktop-v010.18.1.png)
+![過去の画面例：REAL 温度と MCU SIM 湿度を独立した縦軸で表示](docs/release/desktop-showcase.png)
+
+*メンテナー提供の過去の画面例で、表示バージョンは v010.15.2 です。青の湿度は右軸、赤の補正前温度とオレンジの補正後温度は左軸を使います。湿度は MCU の模擬値です。レイアウトの紹介であり、v010.18.1 の新たな測定証拠ではありません。[既存の v010.18.1 スクリーンショット](docs/release/desktop-v010.18.1.png)と[画像の来歴](docs/release/PRESENTATION.md)も参照できます。*
 
 ## 主な機能
 
-- 実温度の収集と3種類の**暫定的な** MCU 温度補正。補正前の平均値と公開値を両方保存します。
-- 温度と湿度の REAL/SIM を MCU で明示的に選択できます。実温度と MCU 模擬湿度の混在に対応し、故障時の自動 SIM 切替は行いません。
-- TH3 のシリアル／追記ファイル／REPLAY 入力、独立した縦軸、点・イベントの確認、SHA-256 検証付き全セッション出力。
-- 表示の一時停止中も記録を継続。End Session で記録を確定してポートを解放します。F1 はオフラインヘルプ、About はアプリと実際に応答した MCU を区別します。
-- 自動再接続と確認済み設定の復元は初期状態で有効です。5秒間隔・最大12回とし、新しい機器識別・ファームウェア・読戻し結果を確認してから設定を変更します。
-
-## ハードウェアと動作環境
-
-STM32F103C8T6、ADS1115、NTC/U6 温度調整回路、CHS1101/TLC556/OPA330 湿度回路、OLED、CH340 USB-UART を使用します。検証済み Windows 配布物は Windows10/11 x64 と適切な CH340 ドライバが必要です。書込みは ST-Link/SWD を使用します。回路図は設計資料であり、実装基板の導通証明ではありません。
-
-[Hardware evidence](docs/hardware/FINAL_TECHNICAL_AUDIT.md) · [Architecture](docs/architecture/OVERVIEW.md)
-
-## ソフトウェア構成
-
-HAL／プラットフォーム → BSP → Driver → 純粋な Algorithm → Application／ソース選択 → Protocol。OLED と UART は同じ公開値を使い、Qt は再校正しません。MCU の起動時は REAL/REAL です。
-
-## ビルドとファームウェア書込み
-
-検証環境は Qt5.14.2/MinGW7.3x64、STM32CubeIDE1.19.0/Arm GCC13.3、Python3、STM32CubeProgrammer です。.project/.cproject を読み込むか、以下のコマンドを使用します。書込み前に対象、電源、イメージ由来、収集停止を確認し、Flash 全体を退避してください。BIN の開始番地は0x08000000。Verify 後に読戻しをバイト単位で比較します。64KiB Flash／20KiB RAM の範囲に収まります。
-
-```powershell
-python tools/build_desktop.py --configuration both --label verification --build-root build_verify/qt --evidence build_verify/qt_logs
-python tools/build_mcu.py --build-root build_verify/mcu --evidence build_verify/mcu_logs
-python tools/run_regressions.py --build-root build_verify/tests --evidence build_verify/test_logs --desktop-objects build_verify/qt/qt_debug/debug
-```
-
-[Build / flash instructions](docs/development/BUILD.md)
+- 補正前温度と MCU による補正後温度を併記。3 種類の**暫定**補正プロファイルを搭載します。
+- チャネルごとの明示的な REAL/SIM 選択。**T:REAL / H:SIM** に対応し、REAL の障害時に SIM へ自動で切り替えません。
+- OLED と TH3 UART は同じ確定済み測定スナップショットを使用します。
+- 温度と湿度で独立した縦軸、サンプル・イベントの確認、シリアル／追記ファイル／REPLAY 入力。
+- 生バイト列、CSV、付随ファイルの記録と SHA-256 検証付き全セッション書き出し。Pause Display 中も収集・記録を続け、End Session で記録を確定して COM を解放します。
+- 自動再接続と確認済み設定の復元は既定で有効。5 秒間隔で最大 12 回とし、機器識別、ファームウェア、最新の読み戻し結果を確認します。
 
 ## Windows ポータブル版と Setup
 
-Release から ZIP または署名なし Setup を取得します。ZIP はフォルダ全体を展開して TempHumi.exe を起動してください。Setup は書込み可能な場所に同じ検証済みランタイムを配置し、スタートメニューと任意のデスクトップショートカットを作成します。自動接続や MCU 書込みは行いません。アンインストールは利用者のデータと設定を保持します。Qt DLL／プラグインも必ず一緒に配置してください。
+[Release v010.18.1](https://github.com/HanamiGekka/STM32-TempHumi-Monitor/releases/tag/v010.18.1) から **ポータブル ZIP** または **Setup** を取得し、公開された SHA-256 と照合してください。配布済みアプリの実行に開発ツールは不要です。
 
-[Release](https://github.com/HanamiGekka/STM32-TempHumi-Monitor/releases/tag/v010.18.1) · [Desktop guide](docs/development/DESKTOP.md)
+1. Windows 10/11 x64 で ZIP 全体を展開して `TempHumi.exe` を起動するか、**未署名**の Setup を実行します。Qt ライブラリとプラグインは EXE と一緒に保持してください。
+2. 基板を接続する場合は適切な CH340 ドライバーを用意し、UART Settings で現在のポートを選びます。設定は **115200 baud、8N1、フロー制御なし**です。
+3. 記録先を選び、**Draw / Start** を押します。起動直後にポートは開きません。ソースや温度補正を変更する場合は対応する Apply を押し、MCU の確認を待ちます。
+
+Setup はスタートメニューと任意のデスクトップショートカットを作成します。自動接続やファームウェア書き込みは行いません。アンインストール時も、インストーラーが所有しないファイルや設定は保持します。F1 はオフラインヘルプ、About はデスクトップのソース情報と応答した MCU の版を表示します。
+
+[デスクトップガイド](docs/development/DESKTOP.md) · [ハードウェアの証拠と制約](docs/hardware/FINAL_TECHNICAL_AUDIT.md)
+
+## ソフトウェア構成
+
+HAL／プラットフォーム → BSP → Driver → 純粋な Algorithm → Application／ソース選択 → Protocol。OLED と UART は同じ出力値を共有し、Qt は再校正しません。ファームウェアの起動時は REAL/REAL です。
+
+ハードウェア設計は STM32F103C8T6、ADS1115、NTC/U6 温度回路、CHS1101/TLC556/OPA330 湿度回路、OLED、CH340 USB-UART で構成します。回路図だけでは実装基板の導通は確認できません。
+
+[アーキテクチャとデータフロー図](docs/architecture/OVERVIEW.md)
 
 ## データ収集とプロトコル
 
-現在のポートを確認し、115200/8N1／フロー制御なしを使用します。起動直後は SERIAL を準備するだけで接続しません。保存先を選択して開始してください。ソース／補正変更は Apply と MCU 応答で確定します。TH3 は生コード、単位、有効性、エラー、各ソース、世代を含む23フィールドです。表示窓は5–1200秒、最大24000点。生データ／CSV 記録は表示範囲の切詰めから独立しています。
+TH3 は **23 フィールド**で、生コード、単位、有効性、エラー、チャネル別ソース、世代を伝送します。表示範囲は **5–1200 秒**、最大 24,000 点です。表示の切り詰めや軸操作は完全な生データ／CSV 記録を変更しません。左側のズーム・ドラッグは 2 本の温度曲線、右側は湿度に作用します。Reset Y Scale で自動範囲に戻ります。
 
-[TH3](docs/protocol/TH2_TH3.md) · [UART commands](docs/protocol/UART_COMMANDS.md)
+[TH3 仕様](docs/protocol/TH2_TH3.md) · [UART コマンド](docs/protocol/UART_COMMANDS.md)
 
 ## 試験と検証
 
-MCU と Qt の Debug/Release のフルビルドは、いずれもエラー・警告なしで完了しました。ホスト回帰22スイート、表示倍率100%/150%で各94項目のネイティブ GUI 試験、ポータブル版120項目、Bundle102項目に合格しています。ポータブル版とインストール版では、それぞれホスト側の記録時間とソース時刻の前進量がともに3600秒以上となる実機試験を実施しました。時間・フレーム数・保存した異常は検証報告に記載しています。実際のインストール、ヘルプ、記録、シリアル通信、アンインストール時のデータ保持も確認済みです。
+v010.18.1 のリリース検証では、MCU／Qt の Debug・Release ビルドで警告・エラーなし、ホスト回帰 22 スイート、100%／150% の各表示倍率でネイティブ GUI 94 項目、ポータブル版 120 項目、Bundle 102 項目を記録しています。実際のインストール、ヘルプ、記録、シリアル通信、アンインストール時のデータ保持も確認済みです。
 
-提供された10組の温度比較では、Raw MAE0.754℃／RMSE1.020725℃、補正後 MAE0.522℃／RMSE0.720777℃、補正後最大絶対誤差1.53℃、±1℃以内8/10でした。全測定範囲の計量精度を保証する結果ではありません。
+ポータブル版とインストール版は、それぞれホスト記録時間／ソース時刻の前進量が **3665.000／3664.149 秒**、**3664.995／3664.148 秒**となり、3600 秒の基準を満たしました。保存した異常と各結果の適用範囲は[検証報告](docs/release/VALIDATION.md)を参照してください。既存のリリース結果を再利用し、今回の文書更新では長時間試験やバイナリの再ビルドは行っていません。
 
-[Validation](docs/release/VALIDATION.md)
+提供された温度 10 組では、補正前 MAE **0.754 °C**／RMSE **1.020725 °C**、補正後 MAE **0.522 °C**／RMSE **0.720777 °C**、補正後最大絶対誤差 **1.53 °C**、±1 °C 以内 **8/10** でした。独立した全測定範囲の精度を示すものではありません。
+
+## ビルドとファームウェア書込み
+
+検証済みツールチェーンは **Qt 5.14.2／MinGW 7.3 x64**、**STM32CubeIDE 1.19.0／Arm GCC 13.3**、Python 3、STM32CubeProgrammer です。[ビルドガイド](docs/development/BUILD.md)にデスクトップ、MCU、ホスト検査、SWD 書き込み手順をまとめています。対象は 64 KiB Flash／20 KiB RAM。書き込み前に収集を停止し、対象とイメージの出所を確認して Flash 全体を退避します。BIN の開始番地は `0x08000000` で、Verify と読み戻し比較を行います。
 
 ## 既知の制約
 
-- 実湿度は **PARTIAL / NOT VALIDATED**。模擬湿度は実 RH 精度の証拠になりません。
-- PWM 波形・周波数・デューティ比は **NOT TESTED**。V_CHS1101 のほぼ0Vという観測とバッファ／ADC の直流値には未解決の矛盾があります。
-- USB 異常の物理原因は **UNRESOLVED**。復旧ログだけでケーブル、電源、はんだ接合の原因は断定しません。
-- 温度補正は暫定です。独立した全範囲精度、新たな OLED 光学測定、別の実 Windows PC での検証は主張しません。
+- **REAL 湿度：PARTIAL / NOT VALIDATED**。SIM 湿度から実測 RH の精度は判断できません。
+- **PWM：NOT TESTED ON HARDWARE**。波形、周波数、デューティ比の実測がありません。**V_CHS1101：CONFLICT** はバッファ／ADC の直流値との矛盾を示します。
+- **USB の物理原因：UNRESOLVED**。ソフトウェア上の復旧成功だけでは、ケーブル、電源、はんだ接合の原因を特定できません。
+- **独立した全測定範囲の温度精度：NOT VERIFIED**。補正は暫定であり、新たな OLED 光学測定や別の実 Windows PC での検証は主張しません。
+- **Setup：UNSIGNED（未署名）**。
 
 ## 配布物とソースの対応
 
-デスクトップ v010.18.1 は審査済み公開コミットからビルドし、MCU v010.17.1 は検証済みバイト列を保持します。再ビルドはそのコミットと時刻を埋め込むため、同一版の正式置換とは扱いません。独立した公開履歴から、製品入力ハッシュ・凍結ソース・配布物 SHA-256 の対応を追跡できます。生セッション、機器識別子、非公開履歴、基板写真、アカウントを含む CAD データベースは公開しません。
-
-[Source / asset identity](docs/release/SOURCE_IDENTITY.json)
+デスクトップ **v010.18.1** と MCU **v010.17.1** は別々の版を持ちます。[ソースと配布物の対応表](docs/release/SOURCE_IDENTITY.json)で凍結ビルド、公開コミット、配布物ハッシュを追跡できます。再ビルドにはその時点のコミットと時刻が入り、同一版の凍結済み配布物は置き換えません。非公開履歴、生セッション、機器識別子、アカウント情報を含む CAD は公開対象外です。
 
 ## ライセンスと貢献
 
-プロジェクト独自のソース／文書は **GPL-3.0-or-later**。QCustomPlot は Emanuel Eichhammer 氏によるもので、Qt/ST/Arm/MinGW は各上流ライセンスを保持します。リポジトリ所有者が主な開発者です。他のチームメンバーの貢献にも謝意を表し、メンバーは公開に同意しています。対応する Qt ソースとランタイムの告知を Release に添付します。
+プロジェクト独自のソースと文書は **GPL-3.0-or-later**。QCustomPlot は Emanuel Eichhammer 氏によるもので、Qt／ST／Arm／MinGW は上流の条件を保持します。主な開発者はリポジトリ所有者です。他のチームメンバーの貢献に謝意を表し、公開への同意を得ています。対応する Qt ソースとランタイム告知は Release に添付されています。
 
-[LICENSE](LICENSE) · [NOTICE](NOTICE.md) · [Dependency terms](docs/release/THIRD_PARTY_NOTICES.md)
+[LICENSE](LICENSE) · [NOTICE](NOTICE.md) · [依存関係の条件](docs/release/THIRD_PARTY_NOTICES.md)
