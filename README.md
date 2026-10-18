@@ -6,9 +6,9 @@ An STM32F103C8T6 acquisition system with a Qt desktop app for plotting, recordin
 
 Current release: desktop **v010.18.1** with MCU firmware **v010.17.1**.
 
-![Historical TempHumi interface: REAL temperature and MCU SIM humidity on independent axes](docs/release/desktop-showcase.png)
+![Actual TempHumi v010.18.1: REAL temperature and MCU SIM humidity on independent Y axes](docs/release/desktop-v010.18.1-showcase.jpg)
 
-*Maintainer-supplied historical presentation image, showing v010.15.2. Blue uses the right humidity axis; red and orange share the left temperature axis. The humidity shown is MCU-simulated. This image illustrates the layout and is not new v010.18.1 measurement evidence. The [original v010.18.1 screenshot](docs/release/desktop-v010.18.1.png) is retained; see [image provenance](docs/release/PRESENTATION.md).*
+*Actual released Qt **v010.18.1**, with MCU firmware **v010.17.1** confirmed over USB UART: **T:REAL / H:SIM**. Blue uses the independent right humidity axis; red raw and orange MCU-corrected temperature share the left axis. The user moved the board from room conditions to near the computer exhaust during this session. Humidity is MCU-simulated, correction is provisional, and this is an interface illustration, not a new accuracy test. Captured about 17 minutes into a 25-minute session; source/fit changes and recovered connection segments remain visible. The [historical v010.15.2 image](docs/release/desktop-showcase.png) and [original v010.18.1 image](docs/release/desktop-v010.18.1.png) are retained; see [capture conditions and provenance](docs/release/PRESENTATION.md).*
 
 ## Features
 

@@ -6,9 +6,9 @@
 
 目前發行：桌面版 **v010.18.1**，MCU 韌體 **v010.17.1**。
 
-![歷史介面展示：REAL 溫度與 MCU SIM 濕度使用獨立縱軸](docs/release/desktop-showcase.png)
+![實際 TempHumi v010.18.1：REAL 溫度與 MCU SIM 濕度使用獨立縱軸](docs/release/desktop-v010.18.1-showcase.jpg)
 
-*維護者提供的歷史展示圖，介面版本為 v010.15.2。藍色濕度曲線使用右軸，紅色原始溫度與橘色校正溫度共用左軸；圖中濕度由 MCU 模擬。此圖說明顯示配置，不作為 v010.18.1 的新測量證據。[原有 v010.18.1 螢幕截圖](docs/release/desktop-v010.18.1.png)與[圖片來源說明](docs/release/PRESENTATION.md)均保留。*
+*實際發行的 Qt **v010.18.1**，透過 USB UART 確認 MCU 韌體為 **v010.17.1**，來源為 **T:REAL / H:SIM**。藍色濕度使用獨立右軸，紅色原始溫度與橘色 MCU 校正溫度共用左軸。記錄期間，使用者將板卡從室溫環境移至電腦出風口附近。濕度由 MCU 模擬，溫度修正仍屬暫定；此圖展示介面，不是新的精度測試。截圖時間約為第 17 分鐘，完整記錄約 25 分鐘；資料來源、擬合切換及斷線復原的分段均保留。[歷史 v010.15.2 圖](docs/release/desktop-showcase.png)與[原有 v010.18.1 圖](docs/release/desktop-v010.18.1.png)均保留，詳見[擷取條件與來源](docs/release/PRESENTATION.md)。*
 
 ## 主要功能
 
