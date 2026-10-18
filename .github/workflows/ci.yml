@@ -1,0 +1,16 @@
+name: Public source checks
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  source-and-host:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Reviewed public files and documentation
+        run: python tools/check_repository.py --public
+      - name: Host command and explicit hybrid-source vectors
+        run: python tools/run_regressions.py --host-only --build-root build_verify/host --evidence build_verify/host_logs

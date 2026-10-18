@@ -1,0 +1,19 @@
+* text=auto
+*.c text eol=lf
+*.h text eol=lf
+*.cpp text eol=lf
+*.py text eol=lf
+*.md text eol=lf
+*.png binary
+*.ico binary
+# Preserve imported vendor/generated/legacy whitespace without rewriting verified inputs.
+Drivers/** -whitespace
+Core/Src/system_stm32f1xx.c -whitespace
+Core/Inc/stm32f1xx_hal_conf.h -whitespace
+Core/Startup/** -whitespace
+Debug/** -whitespace
+Release/** -whitespace
+.mxproject -whitespace
+UIDesktop/plot/** -whitespace
+UIDesktop/config/settingsdialog.h -whitespace
+UIDesktop/serial-and-plot.txt -whitespace

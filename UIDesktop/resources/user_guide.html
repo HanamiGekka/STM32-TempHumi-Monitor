@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>TempHumi User Guide</title></head><body>
+<h1>TempHumi Monitor — User Guide</h1>
+<p>This guide is embedded in the application and works offline. Use the chapter selector or Find next.
+The desktop version and actually observed MCU version are separate in Help &gt; About TempHumi.</p>
+<h2 id="section1">1. Getting started</h2>
+<p>Extract the complete portable ZIP and keep its DLLs, plugins and notices beside TempHumi.exe.
+Double-click the EXE. Startup prepares SERIAL but does not open the port. Choose a writable recording folder,
+select the attached device in UART Settings, then Draw / Start. Wait for live TH3 and mode/fit readback.</p>
+<h2 id="section2">2. UART and recovery settings</h2>
+<p>Select the actual port and baud (the project board normally uses COM13,115200,8N1,no flow control).
+Automatic reconnect and confirmed source/fit restoration default ON for the selected trusted attachment.
+Legacy settings without recorded intent migrate visibly to ON; versioned explicit OFF is preserved.
+Automatic configuration changes additionally require a fresh matching MCU UID, firmware and live state.
+An unavailable STM32F1 debug device code does not replace or invalidate a verified factory UID.
+Changing only these options on an active connection does not end the session.</p>
+<p>A supplied USB serial is preferred. A no-serial CH340 instead needs a matching Windows PnP instance and USB
+location, with exactly one matching adapter. Another USB socket, multiple identical adapters or changed identity
+requires manual selection. This identifies a trusted attachment, not a cryptographic identity of the MCU behind it.
+Do not swap the board behind a trusted adapter during a session.</p>
+<h2 id="section3">3. Draw / Start</h2>
+<p>Start creates a raw/CSV/metadata session. A lost active connection can be manually reopened with
+Reconnect Selected Port or Draw / Start while keeping that session. End Session followed by Start creates
+a new session. Unavailable/occupied ports are reported; they do not generate measurements.</p>
+<h2 id="section4">4. REAL and SIM</h2>
+<p>REAL is the physical channel path. SIM is explicitly generated data, never proof of physical humidity or
+temperature. Per-channel validity is independent: a failed REAL humidity channel can be N/A while temperature
+continues. The application never silently changes a faulty REAL channel to SIM.</p>
+<h2 id="section5">5. Choose temperature and humidity sources</h2>
+<p>Choose each source separately and click Apply Sources. A combo edit is not a device change.
+ACK alone is not confirmation: MODE readback and an actual TH3 window must agree. Requested and observed values
+are displayed separately until confirmed. Explicitly select H:SIM if simulated humidity is desired.</p>
+<h2 id="section6">6. Three curves and two Y axes</h2>
+<p>Red is the original physical temperature mean, orange is the MCU output after the selected correction,
+and blue is humidity. Red and orange share the left temperature axis; blue uses its own right humidity axis.
+Checkboxes affect visibility only, not recording or OLED correction. Off disables the corrected checkbox.
+When a fit is inactive or its displayed correction is tiny, red and orange can overlap; values are not shifted
+apart. Missing/invalid data and disconnected time stay as gaps.</p>
+<h2 id="section7">7. AUTO / MANUAL X window</h2>
+<p>AUTO expands among supported windows. MANUAL accepts 5–1200 seconds; Apply or Enter commits the width.
+Refresh does not overwrite an edit. The graph retains up to 1200 seconds / 24000 geometry points; disk records
+keep earlier samples. After a reset/recovery the composite plot coordinate can differ from MCU uptime:
+use the Inspector/CSV for exact source timestamp and segment.</p>
+<h2 id="section8">8. Wheel and drag</h2>
+<p>Wheel zooms vertically and vertical drag moves the selected Y range. The left half/left axis controls
+both temperature curves; the right half/right axis controls humidity. Reset Y Scale returns to automatic
+ranges. A short click selects a sample rather than dragging. X management remains independent.</p>
+<h2 id="section9">9. Persistent point Inspector</h2>
+<p>Outside Measure mode, click near a visible valid sampled point. The nearest visible curve is selected
+by pixel distance. The nonmodal Data point tab keeps a copied snapshot until you close, clear or replace it.
+Other clicks, live refresh, hiding curves and trimming do not erase it. A trimmed point is labeled historical.
+It shows local receipt time, exact MCU/source time, segment, raw/corrected/humidity values, source and fit status.
+N/A means missing/invalid evidence, including an unavailable original pairing; no Qt refit fills it.
+Advanced details retain exact original UTC/raw fields. Advanced &gt; Recorded point / event Inspector reopens it.</p>
+<h2 id="section10">10. Events and local time</h2>
+<p>Click a pause/resume/fit/segment line for the persistent Events tab. Hover offers only a brief preview.
+Select a list row or Previous/Next to read dense events directly; repeated clicks on overlapping lines are not
+needed. The latest 256 events are listed; full session_events.jsonl remains recorded. Nearby lines may share one
+marker to reduce clutter without deleting events. Unknown source time is shown as unknown.</p>
+<p>Primary UI times use the computer's system local time zone and show its UTC offset, including cross-day/DST
+conversion. Original JSON/CSV stay in UTC; Advanced details show the original UTC value. No global +08:00 offset
+is hardcoded. Host receipt/event time is not an independently synchronized sensor clock.</p>
+<h2 id="section11">11. Pause, Resume and Measure</h2>
+<p>Pause Display freezes the graph but reception and recording continue. Resume redraws retained data;
+it cannot recover samples already trimmed from graph memory. Point inspection while paused uses the displayed
+snapshot. Measure takes priority over point/event inspection and selects two source-time cursors within one
+segment. Cross-segment/expired selections are rejected. Analysis uses published MCU temperature.</p>
+<h2 id="section12">12. Temperature fit choices</h2>
+<p>0 Off; 1 Ambient offset; 2 Guarded two-segment LAD; 3 Guarded six-segment Huber.
+Choose and Apply Temperature Fit, then wait for ACK, CAL readback and matching TH3 evidence. These are provisional
+methods supported only by the existing 25.2–35.6°C input data. PROV means applied; BASE means configured but inactive
+outside support; Off means no correction. SIM is not empirically corrected. OLED and UART use the MCU's shared
+published result, with different display rounding. The desktop does not recalculate a physical calibration.</p>
+<h2 id="section13">13. Export</h2>
+<p>File &gt; Export Plot PNG saves the classified graph. Save Analysis JSON exports a valid measured selection.
+Export Session copies a completed session and verifies sizes/SHA-256. End Session before exporting a complete
+session. PNG paths and recording/export directories are separate; existing protected inputs are not overwritten.</p>
+<h2 id="section14">14. Disconnect, automatic recovery and restoration</h2>
+<p>STALE appears after 3.5 seconds without a valid TH3. After 8 seconds, a still-silent handle is released for
+controlled recovery; queued valid data is drained first. Recovery is enabled by default. With a unique trusted identity, retry occurs
+about every 5 seconds, at most 12 attempts per incident. Permission/ownership errors are delayed and bounded too:
+no elevation, forced release of another process or driver changes. Twelve failures lead to WAITING_FOR_USER.
+Reconnect Selected Port stays visible below the plot. End Session cancels every retry and pending restore.</p>
+<p>Recovery keeps session_id, raw/CSV/events/history and display choices. It first waits for TH3 and reads
+MODE/STATUS/ID/CAL. Confirmed configuration restoration is enabled by default. A fresh matching factory UID,
+the same trusted attachment and expected observed firmware are required before it restores
+only the last configuration confirmed by readback and TH3: SET sources first, then CAL fit, each verified.
+Un-applied combo edits are never the target. RESTORED appears only after actual confirmation. A failure shows
+the effective state and reason; no success, continuity or missing sample is invented. Real USB/contact/power
+causes still need independent diagnosis.</p>
+<h2 id="section15">15. End Session and Exit</h2>
+<p>End Session finalizes raw/CSV/events/metadata, releases COM and cancels recovery. The historical graph and
+Inspector snapshots remain. Exit button, File &gt; Exit, main-window Esc and window X all ask Exit TempHumi Monitor? with
+Yes, Exit / No, Continue; No is the default. Cancel keeps acquisition/files/COM active. Confirm performs normal
+End Session before exiting. Disk/metadata errors remain explicit failures, never hidden success.</p>
+<h2 id="section16">16. Recording location and capacity</h2>
+<p>Settings &gt; Choose Recording Location selects the canonical session root; Recording Folder/Open Latest Session
+help locate it. Invalid/full/unwritable storage reports an error without silent fallback. No fixed duration/size
+quota or automatic deletion/rotation is configured; disk/filesystem/memory remain practical limits. The MCU has
+no historical logger and cannot replay measurements lost while disconnected.</p>
+<h2 id="section17">17. Simulation classification</h2>
+<p>FILE_STREAM and REPLAY are labeled software/fixture inputs even when a text row says REAL. SIM curves are
+not physical measurements. Pausing/hiding/exporting a curve does not change its provenance.</p>
+<h2 id="section18">18. Current measurement limitations</h2>
+<p>Independent temperature accuracy is not verified; a small model/wire residual only tests serialization.
+REAL humidity still has unresolved ADC/PWM/as-built hardware issues. The v010.17.1 release adds a read-only
+MCU identity query, with unchanged physical coefficients, calibration support, HAL, pins and OLED. About shows
+the actually observed MCU version; an application target alone does not prove the board was programmed.
+Do not infer a verified USB/contact/power root cause from one Qt error or a lit OLED.</p>
+</body></html>

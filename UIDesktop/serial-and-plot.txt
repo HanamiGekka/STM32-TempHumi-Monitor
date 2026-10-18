@@ -1,0 +1,108 @@
+0. 在项目all.pro文件里面添加：
+   QT += serialport printsupport
+
+1. 在使用m_serial的主窗体的头文件MainWindows.h里面增加代码：
+   private:
+       // SettingsDialog模块在Qt安装目录下Examples/Qt5.14.2/SerialPort/termial项目下
+       SettingsDialog m_settings;     
+       QSerialPort    m_serial;
+
+2. 在使用m_serial的MainWindow.cpp的构造函数里面增加代码：
+    MainWindow::MainWindow(.............)
+    {
+         // ...............
+       
+         
+// 3. 每一次串口收到下位机发送的数据时，都会自动执行readData函数（收到一次数据,可能有多个字节都会自动执行）
+         
+         connect(&m_serial, &QSerialPort::readyRead, this, &MainWindow::readData);         
+    }
+
+4.  在使用m_serial的MainWindow窗体里面实现readData：
+void MainWindow::readData()
+{
+    const QByteArray data = m_serial.readAll();
+    // 处理数据  （数据转化，抽点）
+    // 绘制波形（参考后面步骤9）
+}
+
+5. 从串口配置界面获取串口参数；
+    void MainWindow::readData()
+    {
+        m_settings.exec();  // 显示模式对话框（不关闭当前窗口，不能操作后面的主窗体）
+
+//6. 把串口参数应用到m_serial上；
+       m_settings.SetSerial(&m_serial);	
+    
+//7. 打开串口；
+
+	    m_serial.open(QIODevice::ReadWrite)
+    }
+    	
+8. 串口写数据：如果需要从PC上位机下发数据给单片机下位机，则在合适位置添加如下代码：
+    void MainWindow::readData()
+    {
+        // QByteArray使用的参考资料：https://blog.csdn.net/Aidam_Bo/article/details/85778012    
+        QByteArray  data;   
+        
+        //  获取界面上的数据并赋值给data;
+        
+        //  发送数据
+	    m_serial.write(data);
+    }    
+    
+9. 绘制波形
+
+   (0) 下载qcustomplot.h, qcustomplot.cpp并加入项目；
+       QT       += core gui serialport printsupport
+
+    (1) 在使用m_plot的窗体上把widget提升为QCustomPlot；
+    参考资料：https://blog.csdn.net/a6625138/article/details/49023745
+    
+    (2) 在使用m_plot的窗体的构造函数里面增加代码：    
+    
+     #define TIME_BASE    100       
+    
+     MainWindow::MainWindow(.............)
+     {
+        // ...
+        
+        ui->m_plot->addGraph();
+        ui->plot->xAxis->setRange(0, TIME_BASE);
+        ui->plot->yAxis->setRange(-5, 5);
+     }
+
+   (3） 波形绘制代码
+   
+    static int i = 0;
+    double data = 0.0;
+
+
+    for (i = 0; i < 10000; i++)
+    {
+        data = 5*sin(double(i)/10);
+        ui->plot->graph(0)->addData(i, data);
+
+        ui->plot->replot();
+
+        QThread::msleep(100);
+        QApplication::processEvents();
+
+        if (i > TIME_BASE)
+        {
+            ui->plot->xAxis->setRange(i - TIME_BASE, i);
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,7 @@
+# Corresponding dependency sources
+
+The Release supplies the original, checksum-verified qtbase-everywhere-src-5.14.2.tar.xz and qtserialport-everywhere-src-5.14.2.tar.xz alongside the application binaries. These modules cover the shipped Qt Core/Gui/Widgets/PrintSupport/SerialPort libraries, qwindows, base image plugins and bundled ANGLE implementation. They are unmodified vendor sources, not project-authored software. Qt licenses and embedded third-party notices remain in each archive.
+
+Official alternatives: [qtbase5.14.2](https://download.qt.io/archive/qt/5.14/5.14.2/submodules/qtbase-everywhere-src-5.14.2.tar.xz), [qtserialport5.14.2](https://download.qt.io/archive/qt/5.14/5.14.2/submodules/qtserialport-everywhere-src-5.14.2.tar.xz). SHA-256 values appear in the release manifest. Use Qt's MinGW7.3x64 configuration to build replacement dynamic libraries. Build-system files and third-party sources are included in these source archives.
+
+The unmodified MinGW GCC7.3 runtime is accompanied by its original GPL/GCC Runtime Library Exception and winpthreads notices. [GCC7.3 source](https://ftp.gnu.org/gnu/gcc/gcc-7.3.0/) and [mingw-w64 sources](https://www.mingw-w64.org/downloads/) are upstream access points. The Qt package's original compiler distribution and source provenance are recorded in the release source inventory. Rebuild the application with the documented compatible Qt/MinGW kit; shared DLL replacement and source modification are permitted under the applicable licenses.

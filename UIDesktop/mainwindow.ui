@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry"><rect><x>0</x><y>0</y><width>1100</width><height>720</height></rect></property>
+  <property name="minimumSize"><size><width>720</width><height>480</height></size></property>
+  <property name="font"><font><family>Arial</family><pointsize>9</pointsize></font></property>
+  <property name="windowTitle"><string>TempHumi</string></property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="mainLayout" stretch="0,1,0,0">
+    <property name="spacing"><number>6</number></property>
+    <item><widget class="QLabel" name="lbl_value"><property name="font"><font><pointsize>12</pointsize><bold>true</bold></font></property><property name="text"><string>Temperature N/A | Humidity N/A</string></property><property name="wordWrap"><bool>true</bool></property></widget></item>
+    <item>
+     <widget class="QSplitter" name="contentSplitter">
+      <property name="orientation"><enum>Qt::Horizontal</enum></property>
+      <widget class="QCustomPlot" name="customPlot" native="true"><property name="minimumSize"><size><width>300</width><height>240</height></size></property></widget>
+       <widget class="QScrollArea" name="sideScroll">
+        <property name="minimumSize"><size><width>270</width><height>0</height></size></property>
+        <property name="widgetResizable"><bool>true</bool></property>
+        <property name="frameShape"><enum>QFrame::NoFrame</enum></property>
+        <widget class="QWidget" name="sidePanel">
+         <layout class="QVBoxLayout" name="sideLayout">
+          <item><layout class="QVBoxLayout" name="statusLayout"/></item>
+          <item><widget class="QPushButton" name="btn_mode"><property name="text"><string>View: Recent Window (32 s)</string></property></widget></item>
+          <item><widget class="QGroupBox" name="triggerGroup"><property name="title"><string>Display trigger</string></property><layout class="QGridLayout" name="triggerLayout">
+           <item row="0" column="0"><widget class="QRadioButton" name="radio_rise"><property name="text"><string>Rising edge</string></property><attribute name="buttonGroup"><string notr="true">buttonGroup</string></attribute></widget></item>
+           <item row="0" column="1"><widget class="QRadioButton" name="radio_fall"><property name="text"><string>Falling edge</string></property><attribute name="buttonGroup"><string notr="true">buttonGroup</string></attribute></widget></item>
+           <item row="1" column="0"><widget class="QLabel" name="triggerLabel"><property name="text"><string>Level</string></property></widget></item>
+           <item row="1" column="1"><widget class="QDoubleSpinBox" name="spin_trigLevel"/></item>
+          </layout></widget></item>
+          <item><widget class="QGroupBox" name="analysisGroup"><property name="title"><string>Selected-window analysis</string></property><layout class="QVBoxLayout" name="analysisLayout">
+           <item><widget class="QComboBox" name="cb_analysisChannel"><item><property name="text"><string>Temperature</string></property></item><item><property name="text"><string>Humidity</string></property></item></widget></item>
+           <item><widget class="QLabel" name="lbl_paramResult"><property name="text"><string>Choose Measure, then two source-time cursors.</string></property><property name="wordWrap"><bool>true</bool></property><property name="textInteractionFlags"><set>Qt::TextSelectableByMouse</set></property></widget></item>
+           <item><layout class="QHBoxLayout" name="analysisButtons"><item><widget class="QPushButton" name="btn_details"><property name="text"><string>Details</string></property></widget></item><item><widget class="QPushButton" name="btn_saveAnalysis"><property name="text"><string>Save Analysis</string></property></widget></item></layout></item>
+          </layout></widget></item>
+          <item><widget class="QPushButton" name="btn_exportPlot"><property name="text"><string>Export Plot PNG</string></property></widget></item>
+          <item><spacer name="sideSpacer"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeHint" stdset="0"><size><width>20</width><height>0</height></size></property></spacer></item>
+         </layout>
+        </widget>
+       </widget>
+     </widget>
+    </item>
+    <item><layout class="QHBoxLayout" name="inputLayout"/></item>
+    <item><layout class="QHBoxLayout" name="horizontalLayout">
+     <item><widget class="QPushButton" name="btn_config"><property name="text"><string>UART Settings</string></property></widget></item>
+     <item><widget class="QPushButton" name="btn_draw"><property name="text"><string>Draw / Start</string></property></widget></item>
+     <item><widget class="QPushButton" name="btn_stop"><property name="text"><string>Stop</string></property></widget></item>
+     <item><widget class="QPushButton" name="btn_measure"><property name="text"><string>Measure</string></property></widget></item>
+     <item><widget class="QPushButton" name="btn_exit"><property name="text"><string>Exit</string></property></widget></item>
+    </layout></item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <customwidgets><customwidget><class>QCustomPlot</class><extends>QWidget</extends><header location="global">qcustomplot.h</header><container>1</container></customwidget></customwidgets>
+ <resources/><connections/><buttongroups><buttongroup name="buttonGroup"/></buttongroups>
+</ui>
