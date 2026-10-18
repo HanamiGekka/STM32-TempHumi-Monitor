@@ -6,17 +6,19 @@ A verifiable STM32F103C8T6 temperature/humidity acquisition system with a Qt des
 
 Desktop **v010.18.1**; MCU firmware **v010.17.1**. Functional acquisition, source simulation and independent physical accuracy are separate results.
 
+![TempHumi v010.18.1: REAL temperature / MCU SIM humidity](docs/release/desktop-v010.18.1.png)
+
 ## Features
 
 - Real temperature acquisition and three **provisional** MCU temperature-correction profiles; original and published values are retained.
 - Explicit REAL/SIM selection for each MCU channel, including REAL temperature with MCU SIM humidity. REAL failures never silently become SIM.
 - TH3 serial/file/REPLAY input, independent axes, Inspector, event inspection and SHA-256-verified full-session export.
 - Pause Display leaves recording active; End Session finalizes files and releases the port. F1 opens offline Help; About distinguishes app/source and observed MCU.
-- Recovery and confirmed-configuration restore default ON,5s between at most12attempts; fresh device identity/firmware/readback gates changing commands.
+- Recovery and confirmed-configuration restore default ON, with 5 s between at most 12 attempts; fresh device identity/firmware/readback gates changing commands.
 
 ## Hardware and requirements
 
-STM32F103C8T6, ADS1115, NTC/U6 conditioning, CHS1101/TLC556/OPA330 humidity design, OLED and CH340 USB-UART. The tested Windows package requires Windows10/11 x64 and the appropriate CH340 driver. Firmware programming uses ST-Link/SWD. The design render is not an as-built continuity certificate.
+STM32F103C8T6, ADS1115, NTC/U6 conditioning, CHS1101/TLC556/OPA330 humidity design, OLED and CH340 USB-UART. The tested Windows package requires Windows 10/11 x64 and the appropriate CH340 driver. Firmware programming uses ST-Link/SWD. The design render is not an as-built continuity certificate.
 
 [Hardware evidence](docs/hardware/FINAL_TECHNICAL_AUDIT.md) · [Architecture](docs/architecture/OVERVIEW.md)
 
@@ -26,7 +28,7 @@ HAL/platform -> BSP -> Driver -> pure Algorithm -> Application/source selection 
 
 ## Build and firmware installation
 
-Validated tools: Qt5.14.2/MinGW7.3x64, STM32CubeIDE1.19.0/Arm GCC13.3, Python3 and STM32CubeProgrammer. Import .project/.cproject or use the commands below. Before flashing, identify the target, verify power and image provenance, close acquisition and preserve a full Flash backup; load BIN at0x08000000, Verify and compare readback. Firmware fits64KiB Flash/20KiB RAM.
+Validated tools: Qt 5.14.2/MinGW 7.3 x64, STM32CubeIDE 1.19.0/Arm GCC 13.3, Python3 and STM32CubeProgrammer. Import .project/.cproject or use the commands below. Before flashing, identify the target, verify power and image provenance, close acquisition and preserve a full Flash backup; load BIN at 0x08000000, Verify and compare readback. Firmware fits 64 KiB Flash/20 KiB RAM.
 
 ```powershell
 python tools/build_desktop.py --configuration both --label verification --build-root build_verify/qt --evidence build_verify/qt_logs
@@ -44,15 +46,15 @@ Download the portable ZIP or unsigned Setup from the Release. Extract the comple
 
 ## Acquisition and protocol
 
-Identify the actual port;115200baud,8N1,no flow control. Startup prepares SERIAL without connecting. Choose a recording location and start; Apply Sources/Apply Temperature Fit require MCU confirmation. TH3 has23fields carrying raw codes, units, validity/errors, per-channel sources and generation. Display windows are5–1200s with at most24000points; raw/CSV recording is independent of display trimming.
+Identify the actual port; 115200 baud, 8N1, no flow control. Startup prepares SERIAL without connecting. Choose a recording location and start; Apply Sources/Apply Temperature Fit require MCU confirmation. TH3 has 23 fields carrying raw codes, units, validity/errors, per-channel sources and generation. Display windows are 5–1200 s with at most 24,000 points; raw/CSV recording is independent of display trimming.
 
 [TH3](docs/protocol/TH2_TH3.md) · [UART commands](docs/protocol/UART_COMMANDS.md)
 
 ## Testing and validation
 
-Fresh MCU/Qt Debug and Release builds have zero warnings/errors;22host regression suites,94native GUI checks at each100%/150% scale,120portable-package checks and102bundle checks pass. Separate portable and installed >=3600-second actual-hardware campaigns are required; current final status and counts are in the validation report. Sporadic preserved/recovered errors are reported, not hidden.
+Fresh MCU/Qt Debug and Release builds have zero warnings and errors. All 22 host regression suites, 94 native GUI checks at each of 100% and 150% scale, 120 portable checks and 102 bundle checks pass. Separate portable and installed hardware tests each exceed 3600 seconds of both host recording and forward source time. The validation report records their durations, frame counts and retained anomalies. Actual Setup installation, Help, recording, serial operation and uninstall/data retention also pass.
 
-Supplied ten-pair temperature comparison: raw MAE0.754℃/RMSE1.020725℃; corrected MAE0.522℃/RMSE0.720777℃; maximum corrected absolute error1.53℃;8/10within±1℃. This is not a full-range metrological accuracy guarantee.
+Supplied ten-pair temperature comparison: raw MAE 0.754 °C/RMSE 1.020725 °C; corrected MAE 0.522 °C/RMSE 0.720777 °C; maximum corrected absolute error 1.53 °C; 8/10 within ±1 °C. This is not a full-range metrological accuracy guarantee.
 
 [Validation](docs/release/VALIDATION.md)
 
@@ -71,6 +73,6 @@ Desktop v010.18.1 is built from the reviewed public source commit; MCU v010.17.1
 
 ## License and credits
 
-Project-authored source/docs: **GPL-3.0-or-later**. QCustomPlot is by Emanuel Eichhammer; Qt/ST/Arm/MinGW retain upstream terms. The original student Qt contribution and hardware collaboration are credited as team contributions with owner-confirmed publication consent. Qt corresponding-source archives and runtime notices accompany the Release.
+Project-authored source/docs: **GPL-3.0-or-later**. QCustomPlot is by Emanuel Eichhammer; Qt/ST/Arm/MinGW retain upstream terms. The repository owner is the primary developer; other team members' contributions are acknowledged, and they have agreed to public release. Qt corresponding-source archives and runtime notices accompany the Release.
 
 [LICENSE](LICENSE) · [NOTICE](NOTICE.md) · [Dependency terms](docs/release/THIRD_PARTY_NOTICES.md)

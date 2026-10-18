@@ -1,0 +1,236 @@
+{
+  "schema": "TempHumi reviewed public validation summary v1",
+  "as_of": "2026-10-18T14:50:58.887759+08:00",
+  "desktop_version": "v010.18.1",
+  "firmware_version": "v010.17.1",
+  "formal_build_source": "77f46e0b605097ddd851385bb893006a68685711",
+  "builds": {
+    "Qt": [
+      {
+        "configuration": "debug",
+        "pass": true,
+        "warnings": 0,
+        "errors": 0
+      },
+      {
+        "configuration": "release",
+        "pass": true,
+        "warnings": 0,
+        "errors": 0
+      }
+    ],
+    "MCU": [
+      {
+        "configuration": "Debug",
+        "pass": true,
+        "warnings": 0,
+        "errors": 0
+      },
+      {
+        "configuration": "Release",
+        "pass": true,
+        "warnings": 0,
+        "errors": 0
+      }
+    ]
+  },
+  "programming": {
+    "program_operations": 1,
+    "verify": "PASS",
+    "full_readback": "PASS",
+    "runtime": "PASS",
+    "canonical_public_build_matches_programmed_BIN_HEX": true,
+    "further_program_operations": 0
+  },
+  "regression_suites": 22,
+  "native_GUI_checks": {
+    "100": 94,
+    "150": 94
+  },
+  "portable_package_checks": 120,
+  "bundle_checks": 102,
+  "long_hardware_tests": {
+    "portable": {
+      "distribution": "portable",
+      "requested_process_seconds": 3665,
+      "process_monotonic_seconds": 3667.457467299999,
+      "host_session_seconds": 3665.0,
+      "source_span_seconds": 3664.149,
+      "TH3_frames": 3611,
+      "raw_CSV_records": 10839,
+      "frame_coverage_fraction": 1.000000272839087,
+      "usable_frame_fraction": 1.0,
+      "maximum_forward_interval_seconds": 1.015,
+      "rollback_count": 0,
+      "parse_counts": {
+        "DIAGNOSTIC": 7228,
+        "PARSED": 3611
+      },
+      "byte_anomaly_records": 0,
+      "events": {
+        "SERIAL_OPENED": 1,
+        "SEGMENT_STARTED": 1,
+        "MCU_IDENTITY_READBACK": 1
+      },
+      "unavailable_originals": 0,
+      "source_counts": {
+        "REAL/SIM": 3611
+      },
+      "End_Session": "PASS",
+      "COM_closed": true,
+      "runtime_restoration": "PASS",
+      "pass": true,
+      "acceptance_policy": {
+        "zero_errors_required": false,
+        "minimum_source_elapsed_seconds": 3600,
+        "minimum_host_recording_seconds": 3600,
+        "minimum_expected_frame_coverage_fraction": 0.95,
+        "minimum_usable_frame_fraction": 0.95,
+        "maximum_malformed_fraction": 0.01,
+        "maximum_recovered_source_gap_seconds": 120,
+        "recording_consistency": "Exact raw offsets/CSV/metadata and clean final End Session required",
+        "original_and_OLED_gaps": "Retained as diagnostic completeness limits, not falsely counted as matched"
+      }
+    },
+    "installed": {
+      "distribution": "installed",
+      "requested_process_seconds": 3665,
+      "process_monotonic_seconds": 3667.418183599999,
+      "host_session_seconds": 3664.995,
+      "source_span_seconds": 3664.148,
+      "TH3_frames": 3605,
+      "raw_CSV_records": 10827,
+      "frame_coverage_fraction": 0.9983389551842577,
+      "usable_frame_fraction": 1.0,
+      "maximum_forward_interval_seconds": 7.105,
+      "rollback_count": 0,
+      "parse_counts": {
+        "DIAGNOSTIC": 7222,
+        "PARSED": 3605
+      },
+      "byte_anomaly_records": 1,
+      "events": {
+        "SERIAL_OPENED": 1,
+        "SEGMENT_STARTED": 2,
+        "MCU_IDENTITY_READBACK": 2,
+        "SERIAL_DISCONNECTED": 1,
+        "SERIAL_RECONNECT_ATTEMPT": 1,
+        "SERIAL_REOPENED": 1,
+        "CONFIGURATION_RESTORED": 1
+      },
+      "unavailable_originals": 1,
+      "source_counts": {
+        "REAL/SIM": 3605
+      },
+      "End_Session": "PASS",
+      "COM_closed": true,
+      "runtime_restoration": "PASS",
+      "pass": true,
+      "acceptance_policy": {
+        "zero_errors_required": false,
+        "minimum_source_elapsed_seconds": 3600,
+        "minimum_host_recording_seconds": 3600,
+        "minimum_expected_frame_coverage_fraction": 0.95,
+        "minimum_usable_frame_fraction": 0.95,
+        "maximum_malformed_fraction": 0.01,
+        "maximum_recovered_source_gap_seconds": 120,
+        "recording_consistency": "Exact raw offsets/CSV/metadata and clean final End Session required",
+        "original_and_OLED_gaps": "Retained as diagnostic completeness limits, not falsely counted as matched"
+      }
+    }
+  },
+  "diagnostic_reconciliation": {
+    "portable": {
+      "status": "PASS",
+      "counts": {
+        "original_diagnostics": 3611,
+        "TH3": 3611,
+        "model_and_original_pairs_verified": 3611,
+        "OLED_diagnostics": 3611,
+        "OLED_pairs_verified": 3611,
+        "trailing_OLED_capture_boundary": 0
+      },
+      "maximum_model_vs_wire_error_deg_c": 0.004997634887693891,
+      "maximum_OLED_vs_wire_error_deg_c": 0.005000000000002558,
+      "maximum_glyph_vs_snapshot_error_deg_c": 0.05000000000000071
+    },
+    "installed": {
+      "status": "PARTIAL",
+      "counts": {
+        "original_diagnostics": 3605,
+        "TH3": 3605,
+        "model_and_original_pairs_verified": 3604,
+        "OLED_diagnostics": 3605,
+        "OLED_pairs_verified": 3605,
+        "missing_original_pair": 1,
+        "trailing_OLED_capture_boundary": 0
+      },
+      "maximum_model_vs_wire_error_deg_c": 0.0049990564323678655,
+      "maximum_OLED_vs_wire_error_deg_c": 0.005000000000002558,
+      "maximum_glyph_vs_snapshot_error_deg_c": 0.05000000000000071
+    }
+  },
+  "legacy_installed_strict_auditor": {
+    "status": "FAIL retained",
+    "CSV_byte_boundary_records": 10827,
+    "whole_file_newline_fragments": 10826,
+    "missing_original_pairs": 1,
+    "raw_inputs_modified": false
+  },
+  "controlled_hardware": {
+    "pass": true,
+    "checks": 57,
+    "scope": "Actual UART, explicit controls and labeled software fault injection; no physical cable or power diagnosis"
+  },
+  "profiles_GUI_hardware": {
+    "pass": true,
+    "checks": 78,
+    "stability_seconds_requested": 310,
+    "scope": "Source/profile control and implementation agreement, not independent sensor accuracy"
+  },
+  "host_vectors": {
+    "recovery_policy": 147,
+    "OLED": 2565,
+    "temperature_profile_checks_each_compiled_mode": 3333079,
+    "compiled_modes": [
+      0,
+      1
+    ],
+    "supplied_profile_vector_rows": 147
+  },
+  "additional_recorder_fixture_receipt": {
+    "checks": 634,
+    "strict_field_comparisons": 2662,
+    "fixture_sessions": 6,
+    "IO_failure_cases": 3,
+    "native_metadata_lock_cases": 2,
+    "scope": "Current-run check reused for unchanged recorder implementation; desktop identity metadata differs from its earlier17.1 invocation"
+  },
+  "installer": {
+    "actual_installed_starts": 3,
+    "unicode_and_spaces": true,
+    "runtime_modules_local": 9,
+    "offline_help": true,
+    "recording": true,
+    "normal_exit": true,
+    "uninstall": true,
+    "unowned_data_retained": true,
+    "native_preferences_unchanged": true,
+    "previous_user_installation_files_unchanged": true
+  },
+  "deployment": {
+    "windeployqt_exit": 1,
+    "same_kit_explicit_fallback": "PASS",
+    "unresolved_PE_imports": 0,
+    "second_physical_PC": "NOT TESTED"
+  },
+  "hardware_limits": {
+    "real_humidity": "PARTIAL / NOT VALIDATED",
+    "PWM_waveform": "NOT TESTED",
+    "V_CHS1101": "CONFLICT",
+    "physical_USB_root_cause": "UNRESOLVED",
+    "independent_full_range_accuracy": "NOT VERIFIED",
+    "new_optical_OLED_measurement": "NOT TESTED"
+  },
+  "privacy": "Original sessions/identities/Flash backups/account-bearing CAD/user settings are not published; exact original evidence is retained privately."
+}

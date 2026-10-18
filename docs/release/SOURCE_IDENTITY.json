@@ -5,6 +5,242 @@
   "public_history": "Independent root; no private development ancestors imported",
   "production_input_sha256": {
     "Core/Inc/algo_sensor_convert.h": "fe57a7025c5c288bb217c84dbd0244e58b935378404e30efe62d30e6e5cf543c",
+    "Core/Inc/app_command.h": "a7543baef61ef3487f9476fa23d7f6e84c55e20879ea69b8ccfb882c7e2ae838",
+    "Core/Inc/app_hybrid_source.h": "1db8de5c798519e0afdd14153d99d8ca51d37f4e1b5a30befe98f6ca8d460a31",
+    "Core/Inc/app_measurement_source.h": "39617034e3d2410528ccc8422889a26c124c1c7e110a5992e8a5704ec672eb41",
+    "Core/Inc/app_measurement_source_sim.h": "8ee542aa81aa650f8924b43fff331f6da941da25d2870353a6d5763e6bdaa3aa",
+    "Core/Inc/app_project_version.h": "2b7ce754a60d02e06b0ca04bf475eaa0d6bd57dc7cebb9f5bcdb2ed4d87614e3",
+    "Core/Inc/app_protocol.h": "d0c9beecf9320a7de1c328cf45da6069a0243d53bb7641ae37d9534264be008d",
+    "Core/Inc/app_th_meter.h": "65e8172232850d95b424eae5e80e2f542db0822ae2efc239ffff94863d5af101",
+    "Core/Inc/app_uart_command.h": "71f7bc86c0bf1c383cd2704ef7c7fdd3c678cec26771e3900e4a63f74d653a4d",
+    "Core/Inc/app_version.h": "511db089072e4f37701dbf9c311ee5415e29d1e34f366358ba252aff43c5cd7b",
+    "Core/Inc/bsp_i2c_scan.h": "2394ff3a2eb75c6fa72fc28225f7f67ade2efcc9d5400aa34aefe69195c87c7a",
+    "Core/Inc/bsp_led_key.h": "a76352c9ddfbbe202eb0c11527676599b83a2039ce0a359d4b42701dc1760cdf",
+    "Core/Inc/bsp_uart_command.h": "81aa575b31d5fbd13c05773de689b6cca562b783142bcdee8d4e65bc5de5c799",
+    "Core/Inc/bsp_uart_log.h": "57be33f7e8b53d5680b05ad7db620894cae806b4d4a7e10776fde16b4cb967ca",
+    "Core/Inc/drv_ads1115.h": "d2c2e6b68daa9b72951fb43882f2bb5fe45421668336acef217f42247d950ece",
+    "Core/Inc/drv_humidity_pwm.h": "c2749803813f36a7a49266fbafc4d17bdb56c91297756331d4cb5bd0860f5532",
+    "Core/Inc/drv_oled.h": "eaedb7ec3ae97a344f51a6ce6ffc13405daf75b3bc5f45dfc1d1504530e43e84",
+    "Core/Inc/main.h": "75d8b5dcb13ae83480d455cfab20a24586bc479e455bdef492a554108186921b",
+    "Core/Inc/stm32f1xx_hal_conf.h": "b6537d2787b8b2942b4a1ee7b5ea2edb64625badfeb2774f2ed1bff8578a6ed5",
+    "Core/Inc/stm32f1xx_it.h": "fe67285b4889853a915f2d0583243e330f2457a69ecd4ce3e619e1960e85017e",
+    "Core/Src/algo_sensor_convert.c": "df7d71063167de7c8bd82b4a5fc8bcf81ea5b2427cc90afa8ba57b822e817670",
+    "Core/Src/app_command.c": "30b4a788b9c3792e51f349e0c5aa8264f660ac925a82685021450c2c8ae86c7e",
+    "Core/Src/app_hybrid_source.c": "364ed7c7a866ef9931b7e68629cb17e52a4a4061c843e384e6bb392c98823ecf",
+    "Core/Src/app_measurement_source.c": "c201025eccafc46ef0151412e1921019c0c3df50018e30d6a5c4c27e3a3251f9",
+    "Core/Src/app_measurement_source_sim.c": "e61481e22ba106d7f41d09df077813cbff1ba32983fa97feea3d0e44461dbdde",
+    "Core/Src/app_protocol.c": "096b786e7a2de81f83f9fdaaccdc455d130acea162902301a8b315a2634c5e86",
+    "Core/Src/app_th_meter.c": "eb08601dd3210c017735bccd51216d17ad9632056e0797a40cae839d98f0c624",
+    "Core/Src/app_uart_command.c": "b64cf53ec2b3202395a7445ba930599373835134918e9ef7b58a0741c346070f",
+    "Core/Src/bsp_i2c_scan.c": "f9af4d12958bb4bdb104bd1ac15178fc3d6b76f8a9c48d4345e18025d7483ee4",
+    "Core/Src/bsp_led_key.c": "849923c201a37ac02fef35ded5e45772b192421796a8cd79db5b7f873da1c791",
+    "Core/Src/bsp_uart_command.c": "1493ab0bbe257716ffd0ba707c0a05e1846c329c45be146e1fb31bea6cec04d4",
+    "Core/Src/bsp_uart_log.c": "b5decb2dd4973bfd1943c90bcd4d496f634a29f39b11e0418bb83d4ca02293b8",
+    "Core/Src/drv_ads1115.c": "f073ab53a6491bc34100bf06a64ea07f1667eca4757cb6071d813c81b344a3f9",
+    "Core/Src/drv_humidity_pwm.c": "67d1b93bcc5237f87343027a643aca881db30e3b98674591c85a8b90b7056a83",
+    "Core/Src/drv_oled.c": "e829c59db4c9a7444fb42b80ac4fdec11b752c245fee213dcb23393d13c8b845",
+    "Core/Src/main.c": "7f6489a3229147d25d6fc5607c746e4c98d1d35588ce8c0c832fa5cba7626057",
+    "Core/Src/stm32f1xx_hal_msp.c": "d25feb79cdabc2d4488b8c2553951813e10f4cdc6e618d87e5f6a345f06d136d",
+    "Core/Src/stm32f1xx_it.c": "cb5e389172e333b6534cac129043cd81d07dea56f1065d10fea74579243a5b54",
+    "Core/Src/syscalls.c": "1589f3d61a3625fb2e4604c6ffd48518fda29d1b78bf774b2d91d76236e1777f",
+    "Core/Src/sysmem.c": "ae7da85ddcf68727218002cace4d885d363c9e1cd1955ca1b10ccc5e3075b9b5",
+    "Core/Src/system_stm32f1xx.c": "6f13b57054f33b4dcb8f3f23fa05b2942d9dca8abd9a2a08ecde6f99693505a5",
+    "Core/Startup/startup_stm32f103c8tx.s": "a9a5fc7ed5ff617527dd98b3092830f4d17ed4bf57c99eac2c53bdb514ce138c",
+    "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h": "d9c7c613d9fea74220892b4fbc3e80617493acad82a04bafadab2b4a7198399c",
+    "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h": "05e93fa3ddefb2e83d762b9ca4de36e3bba9cd8e9690400fe9f2c11fc0a3cef5",
+    "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h": "a54dfbb3480c672f532d472a6e84bcf34df6551771d2e9966c5a3503c676b6ab",
+    "Drivers/CMSIS/Include/cmsis_armcc.h": "3371c679298b7db7caae23215ab8efdb95fe3b5c6c1a793f8004e5be16940149",
+    "Drivers/CMSIS/Include/cmsis_armclang.h": "3a33c83dd7533cd2827164b89e66dc7c0f8376ef4e2d255ec50c1a58b36f670b",
+    "Drivers/CMSIS/Include/cmsis_compiler.h": "03ab80c426a8360eaaad833ac816462a9f38cb2e4dbdc490914880ad071181fe",
+    "Drivers/CMSIS/Include/cmsis_gcc.h": "341982e6d6c91119214c47d7a04b31f1f8ce0970c45e2c9fe0870c80d0876e28",
+    "Drivers/CMSIS/Include/cmsis_iccarm.h": "03e120db362480dc0c57b9eb2574972029321fb8d9e993e458dbff69e6f4f91e",
+    "Drivers/CMSIS/Include/cmsis_version.h": "c2570d56ee85d4f2ec0fb62f31d080d3cddf3a015500a4ed5a006a571637b43c",
+    "Drivers/CMSIS/Include/core_armv8mbl.h": "6b1a61685f498b80becd4df1219c50fd47f1e8ec23ee28184585b1025387764b",
+    "Drivers/CMSIS/Include/core_armv8mml.h": "2a9f702aebde491b5a7b96d539413b2ddef1ea6872b09f9397638389aea86d0c",
+    "Drivers/CMSIS/Include/core_cm0.h": "1fedf79e11c6c7f7c02fc2c6d93add0f86b62fadbcb913daece240d97a70720c",
+    "Drivers/CMSIS/Include/core_cm0plus.h": "9fd6ebad79f26eeb25f5cba28fd87bedc9e13213cd44269b049cf1f379d5ab36",
+    "Drivers/CMSIS/Include/core_cm1.h": "1ca25034076f4952af4d235f2c4302bdc81d123cf55bc329d2fa964d9bc0ece1",
+    "Drivers/CMSIS/Include/core_cm23.h": "492e9eebccc634173a92826966c40c98061878daae73c67597e370a8def685f5",
+    "Drivers/CMSIS/Include/core_cm3.h": "655bb08e9474438dec8b1874ea6c63749dc2787b85f06a0987c4870bcb580f21",
+    "Drivers/CMSIS/Include/core_cm33.h": "f4b8df5e3327f38497b1893c4b6d75ef9758a5443423f19b45f1ffe1f51ecffe",
+    "Drivers/CMSIS/Include/core_cm4.h": "53712d8aefacaebf3faa2370be8c7c6065328a974242f9e315ffc86b3ee852c5",
+    "Drivers/CMSIS/Include/core_cm7.h": "4e67355b28417febaa955120abd51fcdcf4d581c5e1522ece1e673c38cd17728",
+    "Drivers/CMSIS/Include/core_sc000.h": "cb3a0b87bdbb70f552773bc442fdacb6c59b06233b5f0d6b2e0e8f56fd561396",
+    "Drivers/CMSIS/Include/core_sc300.h": "2a3ec02d4b947d6eb09a7b9860a4fbe9b9f45ee1a911f1674a424fd6d3faa683",
+    "Drivers/CMSIS/Include/mpu_armv7.h": "e4968e627df085e4ebf46be5140be657e035d978ae1938c1c2e3ee49fbde5030",
+    "Drivers/CMSIS/Include/mpu_armv8.h": "8e5a84b186f303eb3f2ece0cd84f013ac31ed68bffde4feea502acd0b474c40f",
+    "Drivers/CMSIS/Include/tz_context.h": "45565c8cb04c653aabaf3cceddfc848b6a0de28c20d4f7e3d475a992c7eee788",
+    "Drivers/STM32F1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h": "583cd8373bde87cbf384a9153b7c8ba9c456139baebb248bffe7116c926e2286",
+    "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h": "cc3851d46bc92478fe355f8b1fedd013deaa70da5e8e4136ce5cbb2536519803",
+    "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h": "11ef612e231958eb9f3d4f825cda6bed35bd482996ecbf51f34b5ee7d84371f7",
+    "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h": "377e7fc68715cfb6d09715e9d77bd5cee09e79f00479f502d3191016c3c388dd",
+    "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h": "22cbcbf02ef1867f0d9bbf28c600c9aeb71a7d221608449ae64cb48339687928",
+    "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h": "1b09d5229c87587ab894fc3237182a7027b1672a20433b9659433fb978e459f3",
+    "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_exti.h": "745bd5b830259f613d116286a445d18c26677a72170117f2b35b7e0607fd563c",
+    "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h": "fc9d0c2df0c277cbcb37a5baca8e0b6f112e4c7e879dc753b62aa9095732fff5",
+    "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h": "6bdda70eea1f54de098cf7033091c1d367e40043e3e0759ec08700718d38ab35",
+    "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h": "d43ff762af74f1494439c274a0cd409d09db769e6e85d8de941614c81b02b853",
+    "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h": "ab0cf7892b25d9b2488b5284c4836b59f679bbc2ec7c7bc4199f83b2855add68",
+    "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h": "53580269c9d7132b8d105a9d91d71fecf2363c19570bb1c3e12dd82a827bbef2",
+    "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h": "1353dc09e32e7e6ec686b725b80981a9286c7e8b5383f8f4259f672470d481c3",
+    "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h": "8bf099bedb0c4fa035df81520f99e289464293b27e71d7e8759c8d5160ce8ac1",
+    "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h": "ed9ac1b6349ed0989367a1daa82819390dcefec0f6cef6fa432e09b2c9ea0adc",
+    "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h": "7a3dac99a810297b21b785846927dea4b1a43f854b2bd19e0f6b3af767e4eda9",
+    "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h": "21f24eb4e1b8eaeeb50240dbb0c177619f55cd4b12e366ddf4105c269ff628ac",
+    "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h": "949edfcd2021d8c73c5eb36d5cc1fb995b6f7a19fc084121b340c7502d33c135",
+    "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h": "6680693a685a8ed0d09d9c6901328ac23bb207ecc9d68e9521b66cf09c8f75a8",
+    "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_cortex.h": "e46032e4e08ce856c204f91f28018dc4ac59f4b8ea24e3bf0f5a609a4ba7bb32",
+    "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_dma.h": "1a0eba87b8820b996098d1be8d09ab3df996845cf1c1fa5b536cbf6bce8fe16d",
+    "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h": "9f816072941e79763cbc048fe03bf803fd81bf0a0ade876d74a49be8620bfde5",
+    "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h": "8214e55b038bc398bf505f10debb70350b2d42326707e0ce14a91eb6629c0155",
+    "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_i2c.h": "3a82e06a2a2418f1c9ddef5f4f0c80132801d0869d0c35dba047cb40b8157502",
+    "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_pwr.h": "4e706bc7ad93abf9e67433d7c46abf777e74d9036fa03a16380348c118b8c998",
+    "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_rcc.h": "8f9653c499ac50a5d874c2606091b1a2fbed71aae7d25e70d9d518337d7922ed",
+    "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_system.h": "5506acce915aad3a1d0a93f17a07eb2c26c731808dc77c28014eef081c3824bb",
+    "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h": "3400329643cad2343f8c357788d5689e8b8db861bd0b1ef953537b45a0e56875",
+    "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_usart.h": "8684e487827c318256ba7ae36841bd2c7fa2438c0cc5c8aa36b555f607873e77",
+    "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_utils.h": "decb7156d26dc56db7ed76c06c71533ca579905b80824b178749a03a2f224a1b",
+    "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c": "607343f969fce8d49111fe4d8d32001c9b289742408d0452ae49761034f39f01",
+    "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c": "21ccc3b54e45e62b278e7f32fd34533bb1e0f4105c7f47c9218ffa0801bfbddd",
+    "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c": "9ec6e91366c9b27c64b93c4d31fb4636dbc830b055ec501dc728c34eff6900da",
+    "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.c": "6f201feccce8c53717098109bd4d2b4a0894ce4334cd1d6cdd8d15d5e69a8eb6",
+    "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.c": "cddd2adcf578c7d63fd27f55a6ef88f50540a3b65927dfc411c192900c127bb1",
+    "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c": "5e0631a9ce807629cc24d26effb6dba3b0e4eeca10e9d46ae9d5dc40fa1989da",
+    "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c": "397a5911cb314d5afb0e20b33721a056d6b25377272aae2cceb1078b6c224e63",
+    "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c": "dd1c7ad7f83c855f8a8e58ffceff70be0e5b117fbac62b26850c1e5b81367dd7",
+    "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_i2c.c": "a6d87b1d70134ddce7ee2270d8564f0927af43659af2b9e547a985eb2c53fb95",
+    "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c": "d7db81f800f7f41c942b485e2f3fe9a27f5b21def71830297ecb44f131d91e60",
+    "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.c": "5c64b13347aa70dd970f803331d3e106e915e13e2bb029d27c673cfba7cd394c",
+    "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c": "2dc02facf7141e4a25ae5653287d7100adbc3847b8a25e3e00969927c2e727d5",
+    "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c": "d48299529390beba290db650bdac9851d69b9c127d6f9f7bd3dc9f205c843aaf",
+    "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c": "5f129af0c70c87e7c960c11cc046864d5d2f3963b4a952526d306a88d3295c0d",
+    "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c": "0baff878faf8551e43ad63959f04bae08d61ee94e686e56a56cd97d02535c4d9",
+    "STM32F103C8TX_FLASH.ld": "5db2ec1344877abc07c464a27fe75bf740c571183ab8df18cceb20ffedc1b391",
+    "UIDesktop/UIDesktop.pro": "978ae6f32eac2f65e57a85d13b79f9ed51b8800c28a633123abeb15a0a4ec4ac",
+    "UIDesktop/VERSION": "2fbc49b1c2bc8e87de72e2e1d02e302cdc3ee97261271ad43027fee14169e7c5",
+    "UIDesktop/app_desktop_settings.cpp": "6a0f2a9baf47f4946823950084f81e934904e4654abab971e44ed227ad2dbd5d",
+    "UIDesktop/app_desktop_settings.h": "99eb1b34edc17e17a6081dccaffd94a1a8ccd4a6560939010f034b292bd8d958",
+    "UIDesktop/app_file_input.cpp": "f1780d2cf95d2a87f4bb0cd36acab9fc2071cbdea1775985dc256129996c926c",
+    "UIDesktop/app_file_input.h": "5eff4ae20c07f93af5c5d370e36a0378889b2337ac74ea25e4e4449c6dca7fd8",
+    "UIDesktop/app_inspector.cpp": "7bfac289f48bc51e5c67a6f31f8bc3fef7ec153e06524c7d4b78a2d9bd307ca2",
+    "UIDesktop/app_inspector.h": "9fa816e318ba61269b795677574df6c1ac3ae387e5177871fe9d74be66028042",
+    "UIDesktop/app_line_buffer.cpp": "863681e1c1e11203d8dc9491b43abf305ae7ec70a1aeb927e02deed4c1357ed6",
+    "UIDesktop/app_line_buffer.h": "559d76bb305291ece553c780a6816fcb65740a065842a76e67b1acc01f731a3e",
+    "UIDesktop/app_plot_window.cpp": "31ee27086b19ebaba93e1ac13a0f9b73d428fdad635df153f05e0e61091eedf7",
+    "UIDesktop/app_plot_window.h": "785ecd17a81ed239a565b88c7fa4f43a639136efa0d968d8d4b6cd57a9326246",
+    "UIDesktop/app_serial_input.cpp": "3adcea41486de9d6cb98f046635c914d9de28a181f05d67ffbe4391ea0d077e8",
+    "UIDesktop/app_serial_input.h": "c52a33df9bcfc521069fc3025d6853a60d354dd0b3e2829aeaef3e5e6b95e77d",
+    "UIDesktop/app_serial_recovery.cpp": "65ebd39a7d36b1e6b661929520ea05a44f6bc789f81512ffec42d3a316fb468c",
+    "UIDesktop/app_serial_recovery.h": "d184a41acf2792745a86917a62e77a2aba93c6baaed99f3b8de5c76a2aa0ce8f",
+    "UIDesktop/app_session_export.cpp": "26b6075b07933673735fa96cba715d4c95059d3ef1958dff0a33c90cf13799ff",
+    "UIDesktop/app_session_export.h": "bfbd6c23ade5907a11b8ddad6d158c66fb72d1e147dbe198a180dcae002bf784",
+    "UIDesktop/app_session_recorder.cpp": "78b72996bfc993e0f7e5be4515401187d4fe06cd0dc14717634fdf0e0ede3a52",
+    "UIDesktop/app_session_recorder.h": "9bd880c3ea037e6cca6676bbfc0b5396fd7fd184a278e8d383a41f5f4daf4da5",
+    "UIDesktop/app_signal_analysis.cpp": "35bea13349b9a7f2a01426611ef9542377357942bf97b770ae665fa3c53d3875",
+    "UIDesktop/app_signal_analysis.h": "34935c0d79a9224639bff8c5a0f6302f20fafc0775272c093b173471486461d4",
+    "UIDesktop/app_temperature_evidence.h": "189093bec132ebe194827c9fd88578fdea2c18700347c461e821bddca82d743c",
+    "UIDesktop/app_th3.cpp": "b154aa656824bf48ff768729b1e0dc52357ffd7b03202e19b5f7efbf52ccf1d4",
+    "UIDesktop/app_th3.h": "dc0e514d6b995ff58cf01b541456ff16c9c656adbb640610fa3455efd04aa045",
+    "UIDesktop/app_window_help.cpp": "faacfc7a918bf555accd5396b9e5c061eff229c1233af422df0a663c04b270b7",
+    "UIDesktop/app_window_inspection.cpp": "007246a9b42e5302d110f68511f9758c1f94ce40277979f1f6df320f01ed85fa",
+    "UIDesktop/app_window_recovery.cpp": "cc551a9370040f3f69ad05b8dbd5444976da126d2b58245982696b710d2d5fc4",
+    "UIDesktop/app_window_restore.cpp": "366d74c24587017317199b84b238ff6423dfc60ad379b6b8f4b4aa64e52caaca",
+    "UIDesktop/calc/calc.cpp": "42d8aae9f044dd7e9c13b8c533aefac2df7c781398f3d13fb61895e8fa38b50f",
+    "UIDesktop/calc/calc.h": "cc42f16315bd8b9cfa3908c4b01a0571c295ce2c8054190e2d66275b095ae2a0",
+    "UIDesktop/config/settingsdialog.cpp": "5c417195d1e29bb00fb50a2470e3e718d5879e9785cec445dec5e8d0717ac6b3",
+    "UIDesktop/config/settingsdialog.h": "dbf5528783031121875033d35d239324f87d9843f0597c12eda9f7fa4e5c7844",
+    "UIDesktop/config/settingsdialog.ui": "b7e872e7bca53761e3eb1fae8570507fb6548c12cd21f8949e51763a9d6cd3e3",
+    "UIDesktop/main.cpp": "6f047797c1722ffa02b4d01f6fafc03a34548ed71b3ab2ed6cb8b13d1f2cf2bd",
+    "UIDesktop/mainwindow.cpp": "d33f2fa248877df2ffbb004e6991dc9e711610873ba1d118939ba5d935b6879a",
+    "UIDesktop/mainwindow.h": "3173b0b09c6189cca9ded96c8880b033203fb46b2cc24f8b0f0b80cb45e85934",
+    "UIDesktop/mainwindow.ui": "d7761b4567256513a1a0395f311b605a9bb361d5d35a0663e3917167a8afc913",
+    "UIDesktop/plot/qcustomplot.cpp": "ac923c987a114b3f845fc995adc82e104ebe358f3a50869e98a8c3f4258c13e6",
+    "UIDesktop/plot/qcustomplot.h": "7cf7252ce1962ff8eb5f20bdddfe963b40aaa7855caa8c9b68b2d490a560979b",
+    "UIDesktop/resources/temphumi.ico": "c5167e426b61174737226e95d88f1d36225aad632eec99dc46a1a2477c664fb8",
+    "UIDesktop/resources/temphumi.png": "ce5ca01d35a42833056699aa28ba8f9df5309ab2bf2c5e0ca0c8b244e9291f16",
+    "UIDesktop/resources/temphumi.qrc": "36259f724e566f2d395e50e57acfff07abde3fa5dd0d9b599a13d850d42c6eba",
+    "UIDesktop/resources/temphumi.rc": "2cbdaccc89cb653cd2bfea746fd5745d42fb49a195c91a5bcfa2c6166d465109",
+    "UIDesktop/resources/temphumi.rc.in": "02ec8381225da5fdbbc4ab7705a0aa96c868f69e46eaebb3c783c1dd64035261",
+    "UIDesktop/resources/temphumi.svg": "24d20c4a2c6a784240f462e8ddeddd3bcd1c54c6f1e47de0d081023dbe648221",
+    "UIDesktop/resources/user_guide.html": "dc4c97f05fa1e60016d67a23725b251058a92e09ad678ce8200cc5e721b09c13",
+    "VERSION": "61a8479c99651c5ec5e29b526f702351e12b2e102f7fcb06cda248dd3adfe46d"
+  },
+  "public_only_tooling_adaptations": [
+    {
+      "path": "Debug/makefile",
+      "reason": "Retain required make definitions, replace private absolute linker root with PROJECT_ROOT; compiler/link flags unchanged"
+    },
+    {
+      "path": "Debug/objects.list",
+      "reason": "Retain required make definitions, replace private absolute linker root with PROJECT_ROOT; compiler/link flags unchanged"
+    },
+    {
+      "path": "Debug/objects.mk",
+      "reason": "Retain required make definitions, replace private absolute linker root with PROJECT_ROOT; compiler/link flags unchanged"
+    },
+    {
+      "path": "Debug/sources.mk",
+      "reason": "Retain required make definitions, replace private absolute linker root with PROJECT_ROOT; compiler/link flags unchanged"
+    },
+    {
+      "path": "Debug/Drivers/STM32F1xx_HAL_Driver/Src/subdir.mk",
+      "reason": "Retain required make definitions, replace private absolute linker root with PROJECT_ROOT; compiler/link flags unchanged"
+    },
+    {
+      "path": "Debug/Core/Src/subdir.mk",
+      "reason": "Retain required make definitions, replace private absolute linker root with PROJECT_ROOT; compiler/link flags unchanged"
+    },
+    {
+      "path": "Debug/Core/Startup/subdir.mk",
+      "reason": "Retain required make definitions, replace private absolute linker root with PROJECT_ROOT; compiler/link flags unchanged"
+    },
+    {
+      "path": "Release/makefile",
+      "reason": "Retain required make definitions, replace private absolute linker root with PROJECT_ROOT; compiler/link flags unchanged"
+    },
+    {
+      "path": "Release/objects.list",
+      "reason": "Retain required make definitions, replace private absolute linker root with PROJECT_ROOT; compiler/link flags unchanged"
+    },
+    {
+      "path": "Release/objects.mk",
+      "reason": "Retain required make definitions, replace private absolute linker root with PROJECT_ROOT; compiler/link flags unchanged"
+    },
+    {
+      "path": "Release/sources.mk",
+      "reason": "Retain required make definitions, replace private absolute linker root with PROJECT_ROOT; compiler/link flags unchanged"
+    },
+    {
+      "path": "Release/Drivers/STM32F1xx_HAL_Driver/Src/subdir.mk",
+      "reason": "Retain required make definitions, replace private absolute linker root with PROJECT_ROOT; compiler/link flags unchanged"
+    },
+    {
+      "path": "Release/Core/Src/subdir.mk",
+      "reason": "Retain required make definitions, replace private absolute linker root with PROJECT_ROOT; compiler/link flags unchanged"
+    },
+    {
+      "path": "Release/Core/Startup/subdir.mk",
+      "reason": "Retain required make definitions, replace private absolute linker root with PROJECT_ROOT; compiler/link flags unchanged"
+    },
+    {
+      "path": "tools/build_mcu.py",
+      "reason": "Set PROJECT_ROOT for portable CubeIDE make metadata; no production source change"
+    },
+    {
+      "path": "tools/tests/installer_lifecycle.py",
+      "reason": "Physical target identity supplied by operator environment; private board hash omitted"
+    },
+    {
+      "path": "tools/check_repository.py",
+      "reason": "Audit tracked/nonignored public surface while allowing ignored verification outputs"
+    }
+  ],
+  "formal_binaries": "New desktop18.1 portable/Setup built from this public source; unchanged verified MCU17.1 BIN/HEX. Asset hashes and exact build commit are supplied with Release.",
+  "firmware_version": "v010.17.1",
+  "unchanged_behavior_source_commit": "f3d11011a3a6b42390839f16cd63f0f16abbdbdd",
+  "public_release_reason": "New desktop v010.18.1 formal build from this independent public source; existing MCU v010.17.1 bytes remain unchanged and require no additional write.",
+  "private_preexport_input_sha256": {
+    "Core/Inc/algo_sensor_convert.h": "fe57a7025c5c288bb217c84dbd0244e58b935378404e30efe62d30e6e5cf543c",
     "Core/Inc/app_command.h": "e057c951b2a1bf5cf68c59af11835223c06076ef8d63d6851cad9caebdfcc73f",
     "Core/Inc/app_hybrid_source.h": "1db8de5c798519e0afdd14153d99d8ca51d37f4e1b5a30befe98f6ca8d460a31",
     "Core/Inc/app_measurement_source.h": "39617034e3d2410528ccc8422889a26c124c1c7e110a5992e8a5704ec672eb41",
@@ -165,78 +401,17 @@
     "UIDesktop/resources/temphumi.svg": "d84fa0f13d66f4281b43529a964d7170ea55a0d0cd73a6ec5fc8ac192a693d10",
     "UIDesktop/resources/user_guide.html": "5373e810707fc0f03bf8eb0b2c94889f783d98c11b9a86dbdbb660ce3bed76ab"
   },
-  "public_only_tooling_adaptations": [
-    {
-      "path": "Debug/makefile",
-      "reason": "Retain required make definitions, replace private absolute linker root with PROJECT_ROOT; compiler/link flags unchanged"
-    },
-    {
-      "path": "Debug/objects.list",
-      "reason": "Retain required make definitions, replace private absolute linker root with PROJECT_ROOT; compiler/link flags unchanged"
-    },
-    {
-      "path": "Debug/objects.mk",
-      "reason": "Retain required make definitions, replace private absolute linker root with PROJECT_ROOT; compiler/link flags unchanged"
-    },
-    {
-      "path": "Debug/sources.mk",
-      "reason": "Retain required make definitions, replace private absolute linker root with PROJECT_ROOT; compiler/link flags unchanged"
-    },
-    {
-      "path": "Debug/Drivers/STM32F1xx_HAL_Driver/Src/subdir.mk",
-      "reason": "Retain required make definitions, replace private absolute linker root with PROJECT_ROOT; compiler/link flags unchanged"
-    },
-    {
-      "path": "Debug/Core/Src/subdir.mk",
-      "reason": "Retain required make definitions, replace private absolute linker root with PROJECT_ROOT; compiler/link flags unchanged"
-    },
-    {
-      "path": "Debug/Core/Startup/subdir.mk",
-      "reason": "Retain required make definitions, replace private absolute linker root with PROJECT_ROOT; compiler/link flags unchanged"
-    },
-    {
-      "path": "Release/makefile",
-      "reason": "Retain required make definitions, replace private absolute linker root with PROJECT_ROOT; compiler/link flags unchanged"
-    },
-    {
-      "path": "Release/objects.list",
-      "reason": "Retain required make definitions, replace private absolute linker root with PROJECT_ROOT; compiler/link flags unchanged"
-    },
-    {
-      "path": "Release/objects.mk",
-      "reason": "Retain required make definitions, replace private absolute linker root with PROJECT_ROOT; compiler/link flags unchanged"
-    },
-    {
-      "path": "Release/sources.mk",
-      "reason": "Retain required make definitions, replace private absolute linker root with PROJECT_ROOT; compiler/link flags unchanged"
-    },
-    {
-      "path": "Release/Drivers/STM32F1xx_HAL_Driver/Src/subdir.mk",
-      "reason": "Retain required make definitions, replace private absolute linker root with PROJECT_ROOT; compiler/link flags unchanged"
-    },
-    {
-      "path": "Release/Core/Src/subdir.mk",
-      "reason": "Retain required make definitions, replace private absolute linker root with PROJECT_ROOT; compiler/link flags unchanged"
-    },
-    {
-      "path": "Release/Core/Startup/subdir.mk",
-      "reason": "Retain required make definitions, replace private absolute linker root with PROJECT_ROOT; compiler/link flags unchanged"
-    },
-    {
-      "path": "tools/build_mcu.py",
-      "reason": "Set PROJECT_ROOT for portable CubeIDE make metadata; no production source change"
-    },
-    {
-      "path": "tools/tests/installer_lifecycle.py",
-      "reason": "Physical target identity supplied by operator environment; private board hash omitted"
-    },
-    {
-      "path": "tools/check_repository.py",
-      "reason": "Audit tracked/nonignored public surface while allowing ignored verification outputs"
-    }
-  ],
-  "formal_binaries": "New desktop18.1 portable/Setup built from this public source; unchanged verified MCU17.1 BIN/HEX. Asset hashes and exact build commit are supplied with Release.",
-  "firmware_version": "v010.17.1",
-  "unchanged_behavior_source_commit": "f3d11011a3a6b42390839f16cd63f0f16abbdbdd",
-  "public_release_reason": "New desktop v010.18.1 formal build from this independent public source; existing MCU v010.17.1 bytes remain unchanged and require no additional write."
+  "private_preexport_hash_note": "Retained provenance only: original Windows working-copy bytes, including CRLF. The canonical map below identifies the actual formal public build.",
+  "formal_binary_build_commit": "77f46e0b605097ddd851385bb893006a68685711",
+  "public_release_tag": "v010.18.1",
+  "release_audit_tooling_note": "check_release_packages.py supports distinct desktop and firmware versions, with backward-compatible identity fallback; it is not a production build input.",
+  "release_commit_note": "The release tag includes final documentation, reviewed summaries and release-audit tooling after the build commit. All160production inputs remain byte-identical; formal binaries embed the build commit above.",
+  "frozen_assets": {
+    "qt_exe_sha256": "8412750e0fc6e3e30b9917c3e25d756b2153600230a69f63acfa1d685db84263",
+    "desktop_zip_sha256": "1e9d7510a80f25db7afc56bf1588a6a96a947420ca9548d67c5eb35eaf02d073",
+    "mcu_bin_sha256": "5bc9499fa0973a6fa81302fdb0e162c368aaf2de1429b2028c19b7eaaf078cbe",
+    "mcu_hex_sha256": "efb70e930d0331e8a793f8372792609e78d5f374bf07500a6b5d46360708e6ca",
+    "setup_sha256": "d9a04c2f374669a5bf0e8603fa093196d79975a8f2da4c66037314d039a30a64",
+    "bundle_sha256": "9f7a7370c17d2eec36ef0188fab79821c2621e8fdfa571dec3886cd1b0aef6f9"
+  }
 }

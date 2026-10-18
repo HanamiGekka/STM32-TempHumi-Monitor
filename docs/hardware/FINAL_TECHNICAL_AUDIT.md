@@ -1,11 +1,10 @@
 # Final technical audit and course-report evidence
 
-2026-10-18, Asia/Shanghai. RUN #4.4; project/firmware/desktop v010.17.1.
-Production source: `f3d11011a3a6b42390839f16cd63f0f16abbdbdd`;
+2026-10-18, Asia/Shanghai. RUN #4.4 evidence; final desktop v010.18.1, unchanged MCU v010.17.1.
+Retained firmware-behavior baseline: `f3d11011a3a6b42390839f16cd63f0f16abbdbdd`;
 fresh verification checkout baseline: `96415c7ea5fcc522b3a011dc7e33b80d0cf40719`.
-Board label withheld from the public summary. This document is the reusable technical account;
-the [validation summary](../release/VALIDATION.md)
-indexes original evidence and current software-test results.
+Formal public binary build: `77f46e0b605097ddd851385bb893006a68685711`. Board label withheld from the public summary. This document is the reusable technical account;
+the [validation summary](../release/VALIDATION.md) reports reviewed results derived from retained private originals.
 
 ## System and requirements
 
@@ -72,7 +71,9 @@ The ADS1115 driver expresses a +/-4.096 V PGA range and signed 16-bit conversion
 rails. The configured 250 SPS converter rate, approximately 16 groups per second
 and approximately one-second published window are distinct rates.
 
-## Ten independent supplied temperature pairs
+## Ten user-supplied temperature pairs
+
+The arithmetic was independently recomputed. Independence from the earlier fit-selection data is not established.
 
 Signed error is DUT minus reference, in deg C. All ten pairs are retained;
 there is no removal of inconvenient samples and no new fit.
@@ -99,9 +100,7 @@ there is no removal of inconvenient samples and no new fit.
 | Within +/-1 deg C | 7/10 | 8/10 |
 
 MAE improves by 30.7692%; RMSE improves by approximately 29.39%.
-The machine-readable [reviewed validation data](../release/VALIDATION.md)
-and [reviewed validation data](../release/VALIDATION.md)
-allow independent recalculation. This small user-observed comparison does not
+The [ten-pair CSV](../release/temperature_comparison.csv) allows independent recalculation. This small user-observed comparison does not
 establish equilibrium, traceability, full-range accuracy or a +/-1 deg C guarantee.
 
 ## Humidity DC consistency and unresolved conversion
@@ -187,3 +186,35 @@ measurement or automated runtime evidence. Preserve negative results and the
 humidity/USB limitations. Future work may improve as-built evidence and controlled
 reference validation; it is not an unfinished calibration or PCB redesign task
 in this authorized final delivery.
+
+### Traceable course-report material
+
+This is a source map for writing, not a completed school template. For statements
+about physical performance, cite the evidence level and limitations above.
+Source configuration describes intended behavior; it does not prove the assembled
+board or calibrated accuracy.
+
+| Report topic | Maintained source material | Claim boundary |
+|---|---|---|
+| Requirements and goals | [Architecture](../architecture/OVERVIEW.md), root README | Explicit REAL/SIM, validity and error propagation; no full-range accuracy promise |
+| Overall system | [Architecture and data flow](../architecture/OVERVIEW.md) | MCU acquisition/snapshot/serial and Qt consumer responsibilities |
+| STM32 platform | [CubeMX configuration](../../STM32_TempHumi_Monitor.ioc), [initialization](../../Core/Src/main.c) | Code/configuration evidence; preserve generator protection boundaries |
+| ADS1115 acquisition | [Driver](../../Core/Src/drv_ads1115.c), temperature-chain section above | Signed ADC/PGA units and actual input-rail limits are distinct |
+| Temperature hardware and conversion | [Conversion](../../Core/Src/algo_sensor_convert.c), temperature-chain section above | Design/model conflicts and provisional fits remain explicit |
+| Humidity hardware | [PWM driver](../../Core/Src/drv_humidity_pwm.c), DC-consistency section above | Driver existence is not verified PWM/RH conversion |
+| OLED | [Driver](../../Core/Src/drv_oled.c), [application snapshot](../../Core/Src/app_th_meter.c) | Digital diagnostic consistency differs from new optical observation |
+| Serial framing and commands | [TH3 specification](../protocol/TH2_TH3.md), [serializer](../../Core/Src/app_protocol.c), [commands](../../Core/Src/app_uart_command.c) | Keep source, validity, errors, units and counter epochs |
+| Qt parsing and display | [Desktop guide](../../UIDesktop/README.md), [TH3 parser](../../UIDesktop/app_th3.cpp) | Consumer of MCU values; does not independently recalibrate them |
+| Recording and export | [Recorder](../../UIDesktop/app_session_recorder.cpp), [export](../../UIDesktop/app_session_export.cpp) | Exact raw bytes/CSV/metadata are separate from bounded display data |
+| REAL and MCU SIM modes | [Source interface](../../Core/Src/app_measurement_source.c), [simulation](../../Core/Src/app_measurement_source_sim.c) | Explicit per-channel selection; never claim simulated RH as measured RH |
+| Temperature error statistics | Ten-pair table in this document | User-supplied comparison only; independence from earlier fit selection unestablished |
+| Humidity limitations | DC-consistency and final disposition tables | PARTIAL / NOT VALIDATED; no new calibration |
+| USB anomaly and recovery | Session section above, [recovery implementation](../../UIDesktop/app_serial_recovery.cpp) | Software reconnect/restore does not identify an electrical root cause |
+| Software and hardware tests | Validation/experiment index linked at the top | Identify actual version, distribution, duration and retained anomalies |
+| Delivery | Four root README languages and Release identity/validation | Desktop18.1 and MCU17.1 are intentional distinct versions |
+| Limitations and future work | Final disposition table | As-built net/component confirmation, controlled references and physical USB diagnosis are future experiments, not completed results |
+
+Use the actual released GUI screenshot and reviewed schematic render as illustrations.
+Do not manufacture instrument photos, waveforms, reference readings or successful
+humidity results. Preserve original failed/short recordings as dated evidence;
+only the separately accepted canonical long campaigns establish final duration.

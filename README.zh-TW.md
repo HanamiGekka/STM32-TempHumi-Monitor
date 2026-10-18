@@ -6,6 +6,8 @@
 
 桌面版本 **v010.18.1**，MCU 韌體 **v010.17.1**。功能運作、模擬資料及獨立物理精度分別驗證。
 
+![TempHumi v010.18.1: REAL temperature / MCU SIM humidity](docs/release/desktop-v010.18.1.png)
+
 ## 主要功能
 
 - 真實溫度擷取與三種**暫定** MCU 溫度修正方法，同時保留原始平均值及發布值。
@@ -50,7 +52,7 @@ python tools/run_regressions.py --build-root build_verify/tests --evidence build
 
 ## 測試與驗證
 
-本輪 MCU／Qt Debug、Release 完整建置均為零警告、零錯誤；22個主機回歸套件、100%／150%各94項原生 GUI 檢查、120項可攜封裝檢查與102項 bundle 檢查通過。可攜與安裝程式分別要求至少3600秒真實硬體測試；最終狀態及計數見驗證報告。偶發錯誤與復原記錄會保留並個別統計。
+MCU 與 Qt 的 Debug/Release 完整建置均為零錯誤、零警告；22項主機回歸、100%/150%縮放各94項原生 GUI 檢查、120項可攜套件及102項 Bundle 檢查通過。可攜版和安裝版分別完成超過3600秒的實機記錄，主機時間與有效前向來源時間均達標；時長、資料幀數及保留的異常見驗證報告。實際安裝、說明、記錄、序列埠及解除安裝資料保留亦已驗證。
 
 使用者提供的十組溫度比較：Raw MAE0.754℃、RMSE1.020725℃；修正後 MAE0.522℃、RMSE0.720777℃，最大絕對誤差1.53℃，8/10點位於±1℃。此樣本不構成全量程計量精度保證。
 
@@ -71,6 +73,6 @@ python tools/run_regressions.py --build-root build_verify/tests --evidence build
 
 ## 授權條款與貢獻
 
-專案自有原始碼及文件採 **GPL-3.0-or-later**；QCustomPlot 作者為 Emanuel Eichhammer，Qt/ST/Arm/MinGW 保留各自條款。原同學 Qt 程式與硬體協作均標示為團隊貢獻，使用者已確認成員公開授權。Qt 對應原始碼封裝與執行階段聲明隨 Release 提供。
+專案自有原始碼及文件採 **GPL-3.0-or-later**；QCustomPlot 作者為 Emanuel Eichhammer，Qt/ST/Arm/MinGW 保留各自條款。儲存庫擁有者是專案主要開發者；其他組員的貢獻予以致謝，組員已同意公開發布。Qt 對應原始碼封裝與執行階段聲明隨 Release 提供。
 
 [LICENSE](LICENSE) · [NOTICE](NOTICE.md) · [Dependency terms](docs/release/THIRD_PARTY_NOTICES.md)

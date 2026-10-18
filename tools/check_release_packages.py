@@ -1,4 +1,4 @@
-"""Read-only verification of retained unified desktop/MCU release bundles."""
+"""Read-only verification of retained desktop/MCU release bundles."""
 from pathlib import Path, PurePosixPath
 import argparse, hashlib, json, zipfile, os, subprocess
 
@@ -12,7 +12,7 @@ def main():
     p.add_argument('--firmware',type=Path,required=True)
     p.add_argument('--output',type=Path,required=True)
     a=p.parse_args();identity=json.loads(a.identity.read_text(encoding='utf-8'))
-    version=identity['version']; checks=[]
+    version=identity['version'];firmware_version=identity.get('firmware_version',version);checks=[]
     def check(value,name):
         if not value:raise RuntimeError(name)
         checks.append(name)
@@ -27,10 +27,10 @@ def main():
         expected='.'.join(str(int(x)) for x in version.lstrip('v').split('.'))+'.0'
         check(pe_version['file']==expected,'Windows PE FileVersion resource')
         check(pe_version['product']==version,'Windows PE ProductVersion resource')
-    firmware={s:a.firmware/f'TempHumi_{version}_mcu.{s}' for s in ['bin','hex']}
+    firmware={s:a.firmware/f'TempHumi_{firmware_version}_mcu.{s}' for s in ['bin','hex']}
     for suffix,path in firmware.items():
         check(sha(path.read_bytes())==identity['mcu_'+suffix+'_sha256'],'Recorded MCU '+suffix+' hash')
-    check(version.encode() in firmware['bin'].read_bytes(),'Unified version present in firmware')
+    check(firmware_version.encode() in firmware['bin'].read_bytes(),'Recorded MCU version present in firmware')
     check(firmware['bin'].stat().st_size<=65536,'Fits actual 64KB target')
     manifest=json.loads((a.desktop/'release_manifest.json').read_text(encoding='utf-8'))
     check(manifest['version']==version and not manifest['unresolved'],'Desktop version and no unresolved PE imports')
@@ -52,7 +52,7 @@ def main():
             members=[n for n in names if n.endswith('/'+path.name)]
             check(len(members)==1 and z.read(members[0])==path.read_bytes(),'Bundle MCU '+suffix+' byte identity')
         check(any(n.endswith('ACCEPTANCE.txt') for n in names),'Acceptance/accuracy boundary included')
-    result={'pass':True,'version':version,'identity_source':str(a.identity),'bundle':str(a.bundle),
+    result={'pass':True,'version':version,'firmware_version':firmware_version,'identity_source':str(a.identity),'bundle':str(a.bundle),
             'checks':checks,'check_count':len(checks),'zip_entries':len(names),'windows_PE_version':pe_version,
             'hardware_scope':'Reuses original version-specific program/readback/UART evidence; no historical firmware reflash',
             'accuracy':'NOT INDEPENDENTLY VERIFIED','read_only':True}

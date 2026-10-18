@@ -6,9 +6,11 @@
 
 桌面版本 **v010.18.1**，MCU 固件 **v010.17.1**。功能运行、模拟数据和独立物理精度分别验证。
 
+![TempHumi v010.18.1: REAL temperature / MCU SIM humidity](docs/release/desktop-v010.18.1.png)
+
 ## 主要功能
 
-- 真实温度采集与三种**临时性** MCU 温度修正方法；同时保留原始均值与发布值。
+- 真实温度采集与三种**暂定** MCU 温度修正方法；同时保留原始均值与发布值。
 - MCU 温度、湿度可分别显式选择 REAL/SIM，支持真实温度加 MCU 模拟湿度；真实故障不会静默转为模拟。
 - TH3 串口、增长文件和 REPLAY 输入；独立纵轴、数据点与事件检查、SHA-256 校验的完整 Session 导出。
 - 暂停显示不停止记录；结束 Session 完成文件保存并释放串口。F1 为离线帮助，About 区分软件源码身份和实测固件版本。
@@ -50,7 +52,7 @@ python tools/run_regressions.py --build-root build_verify/tests --evidence build
 
 ## 测试与验证
 
-本轮 MCU/Qt Debug、Release 全量构建均零警告、零错误；22个主机回归套件、100%/150%各94项原生 GUI 检查、120项便携包检查和102项 bundle 检查通过。便携与安装程序分别要求不少于3600秒真实硬件测试；最终状态及计数见验证报告。偶发错误和恢复记录保留并单列统计。
+MCU 与 Qt 的 Debug/Release 全量构建均为零错误、零警告；22项主机回归、100%/150%缩放各94项原生 GUI 检查、120项便携包及102项 Bundle 检查通过。便携版和安装版分别完成超过3600秒的实机记录，主机时间与有效前向源时间均达标；时长、帧数及保留的异常见验证报告。实际安装、帮助、记录、串口及卸载数据保留也已验证。
 
 用户提供的十组温度比较：Raw MAE0.754℃、RMSE1.020725℃；校正后 MAE0.522℃、RMSE0.720777℃，最大绝对误差1.53℃，8/10点位于±1℃。该样本不构成全量程计量精度保证。
 
@@ -71,6 +73,6 @@ python tools/run_regressions.py --build-root build_verify/tests --evidence build
 
 ## 许可证与贡献
 
-项目自有源码和文档采用 **GPL-3.0-or-later**；QCustomPlot 作者为 Emanuel Eichhammer，Qt/ST/Arm/MinGW 保留各自条款。原同学 Qt 程序及硬件协作均按团队贡献署名，用户已确认成员公开授权。Qt 对应源码包与运行时声明随 Release 提供。
+项目自有源码和文档采用 **GPL-3.0-or-later**；QCustomPlot 作者为 Emanuel Eichhammer，Qt/ST/Arm/MinGW 保留各自条款。仓库所有者是项目主要开发者；其他组员的贡献予以致谢，组员已同意公开发布。Qt 对应源码包与运行时声明随 Release 提供。
 
 [LICENSE](LICENSE) · [NOTICE](NOTICE.md) · [Dependency terms](docs/release/THIRD_PARTY_NOTICES.md)

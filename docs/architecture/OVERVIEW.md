@@ -2,6 +2,18 @@
 
 STM32F103C8T6 acquires raw sensor inputs and publishes versioned measurements; Qt displays, records and analyzes the supplied semantics.
 
+```mermaid
+flowchart LR
+    RAW["REAL raw inputs"] --> MCU["MCU acquisition, validity and provisional temperature fit"]
+    SIM["Explicit per-channel SIM"] --> MCU
+    MCU --> OLED["OLED shared snapshot"]
+    MCU -->|TH3 UART| QT["Qt desktop"]
+    QT --> RECORD["Exact raw bytes, CSV and sidecars"]
+    QT --> DISPLAY["Plots, Inspector and export"]
+```
+
+Arrows show data flow. REAL humidity remains unvalidated; SIM is explicitly selected and labeled. The layer table below describes software responsibilities.
+
 | Layer | Location | Responsibility |
 |---|---|---|
 | Platform | Core generated initialization, Drivers | Clock/GPIO/peripheral initialization and HAL/CMSIS |

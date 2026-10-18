@@ -1,6 +1,6 @@
 # Third-party source and runtime notices
 
-Project source/documentation is GPL-3.0-or-later. The original student-contributed Qt application and hardware collaboration are team contributions, with publication consent confirmed by the owner. Existing upstream headers/licenses control their files.
+Project source/documentation is GPL-3.0-or-later. The repository owner is the primary developer; other team members are acknowledged and have agreed to public release. Existing upstream headers/licenses control their files.
 
 | Component | Terms and corresponding source |
 |---|---|

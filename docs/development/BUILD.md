@@ -23,3 +23,49 @@ The capture helper can control a selected port, but a normal app launch or insta
 ## Build identity
 
 Fresh Qt builds embed their checkout commit and compile time, so their hashes differ from frozen historical release EXEs. The production input hashes and formal assets are mapped in [source identity](../release/SOURCE_IDENTITY.json); verification builds are not silently promoted as same-version release replacements. Physical SWD/UART and proprietary Windows kit validation are local gates, not GitHub-hosted CI.
+
+## Rebuilding a local portable package and Setup
+
+Use a fresh output directory and the receipts from your own checkout. The current
+desktop version is 18.1 while the unchanged MCU version is 17.1. The installer
+accepts an explicit local identity plus both fresh build receipts; it does not
+require access to private experiment files. Local rebuilds embed their own
+commit/time and are not replacements for frozen official Release assets.
+After the build commands above with label verification, run:
+
+```powershell
+python tools/package_desktop.py --build-summary build_verify/qt_logs/verification_summary.json --evidence build_verify/package_logs --destination dist/local/v010.18.1 --zip
+```
+
+Create a local identity from the same receipts and actual package bytes:
+
+```powershell
+@'
+from pathlib import Path
+import hashlib, json
+root = Path.cwd()
+qt = json.loads((root / "build_verify/qt_logs/verification_summary.json").read_text(encoding="utf-8"))
+mcu = json.loads((root / "build_verify/mcu_logs/mcu_build_summary.json").read_text(encoding="utf-8"))
+assert qt["pass"] and mcu["pass"]
+release = next(item for item in mcu["builds"] if item["configuration"] == "release")
+version = qt["version"]
+sha = lambda path: hashlib.sha256(path.read_bytes()).hexdigest()
+identity = {
+    "version": version,
+    "firmware_version": mcu["version"],
+    "source_commit": qt["head"],
+    "qt_exe_sha256": sha(root / "dist/local" / version / "TempHumi.exe"),
+    "desktop_zip_sha256": sha(root / "dist/local" / ("TempHumi_" + version + "_win64.zip")),
+    "mcu_bin_sha256": release["bin_sha256"],
+    "mcu_hex_sha256": release["hex_sha256"],
+}
+(root / "dist/local/identity.json").write_text(json.dumps(identity, indent=2) + "\n", encoding="utf-8")
+'@ | python -X utf8 -
+python tools/build_installer.py --identity dist/local/identity.json --desktop dist/local/v010.18.1 --portable-zip dist/local/TempHumi_v010.18.1_win64.zip --build-summary build_verify/qt_logs/verification_summary.json --firmware-build-summary build_verify/mcu_logs/mcu_build_summary.json --output dist/local --evidence build_verify/installer_logs
+```
+
+Inno Setup 7 is an additional build prerequisite; its compatible compiler is
+searched on E, C, then D. Preserve dependency notices and Qt corresponding
+sources when distributing a rebuilt runtime. Package checks do not replace
+actual install/start/record/close/uninstall or board acceptance. Review local
+manifests and runtime data for privacy before sharing.
