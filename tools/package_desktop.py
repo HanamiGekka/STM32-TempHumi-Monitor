@@ -73,12 +73,21 @@ Included license texts and their source locations are indexed in vendor_notices/
 ''',encoding='utf-8')
     # The installed kit keeps its notices outside the binary kit root. A glob
     # of that root alone can silently produce a package with no license texts.
+    def public_origin(value):
+        if isinstance(value, dict): return {k:public_origin(v) for k,v in value.items()}
+        if isinstance(value, list): return [public_origin(v) for v in value]
+        if not isinstance(value, str): return value
+        # Hashes retain exact provenance; published metadata uses logical kit roots.
+        for base,label in [(target,'<desktop>'),(ROOT,'<project>'),
+                           (gcc.parent,'<MinGW7.3>'),(qt.parent.parent,'<Qt5.14.2SDK>')]:
+            value=value.replace(str(base),label).replace(base.as_posix(),label)
+        return value
     license_dir=target/'vendor_notices';notice_origins={}
     def notice(source,relative):
         if not source.is_file():raise RuntimeError('Missing required notice: '+str(source))
         destination=license_dir/relative;destination.parent.mkdir(parents=True,exist_ok=True)
         shutil.copy2(source,destination)
-        notice_origins['vendor_notices/'+relative]={'source':str(source),'sha256':sha(source)}
+        notice_origins['vendor_notices/'+relative]={'source':public_origin(str(source)),'sha256':sha(source)}
     notice(ROOT/'LICENSE','project/GPL-3.0.txt')
     for name in ['LGPL-3.0.txt','BSD-3-Clause.txt','Apache-2.0.txt']:
         notice(ROOT/'LICENSES'/name,'project/'+name)
@@ -99,7 +108,7 @@ ST HAL/Arm CMSIS firmware terms: project BSD/Apache texts, with original source 
 Each copied text is byte-identical to its project/installed-kit origin; release_manifest.json
 records the notice source and SHA-256. This index is provenance, not a public publication claim.
 Corresponding project build source: commit {data['head']} in the source checkout.
-Build reproduction: docs/development/BUILD.md. Qt source: {qt_source.parent}.
+Build reproduction: docs/development/BUILD.md. Qt source: {public_origin(str(qt_source.parent))}.
 Existing source attribution and per-file terms remain authoritative. No private session/board data.
 ''',encoding='utf-8')
     imports={}; unresolved=[]
@@ -118,6 +127,8 @@ Existing source attribution and per-file terms remain authoritative. No private 
         if source is None: raise RuntimeError('Dependency does not match installed kit: '+str(relative))
         origin[str(relative)]=str(source)
     manifest={'version':version,'created_at':datetime.now(timezone.utc).isoformat(),'build_head':data['head'],'exe_sha256':sha(target/'TempHumi.exe'),'source_hashes':data['source_hashes'],'kit':str(qt),'mingw':str(gcc),'windeployqt_exit':deployed.returncode,'windeployqt_command':command,'recovery':recovery,'runtime_origins':origin,'notice_origins':notice_origins,'packaging_tool_sha256':sha(Path(__file__)),'imports':imports,'unresolved':unresolved,'payload':{str(x.relative_to(target)):{'bytes':x.stat().st_size,'sha256':sha(x)} for x in sorted(target.rglob('*')) if x.is_file()}}
+    manifest=public_origin(manifest)
+    manifest['origin_path_notation']='Logical project/desktop/QtSDK/MinGW roots; exact origin bytes are SHA-256 pinned.'
     manifest['firmware_source_version']=data.get('firmware_source_version','UNKNOWN')
     manifest['firmware_programmed_by_package']=False
     (target/'release_manifest.json').write_text(json.dumps(manifest,indent=2),encoding='utf-8')

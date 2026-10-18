@@ -230,6 +230,7 @@
     "tools/generate_desktop_icon.py",
     "tools/host_src/simulation_probe.c",
     "tools/host_src/simulation_stream.c",
+    "tools/installer/TempHumi.iss",
     "tools/launch_desktop.py",
     "tools/package_desktop.py",
     "tools/qt_sim_package/BUILD_SIMULATION.bat",
